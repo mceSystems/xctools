@@ -3,5 +3,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "xcodembed"
+    name: "xcodembed",
+    targets: [
+        Target(name: "cli"),
+        Target(name: "xcodembed")
+    ],
+    dependencies: [
+    .Package(url: "https://github.com/kylef/Commander.git", majorVersion: 0, minor: 6),
+    .Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 3, minor: 0),
+    .Package(url: "https://github.com/kylef/PathKit", majorVersion: 0, minor: 8)
+  ]
 )
