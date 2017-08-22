@@ -1,7 +1,7 @@
 import Foundation
 import XCTest
 
-import xcodembed
+import Core
 
 class ActionTests: XCTestCase {
     
