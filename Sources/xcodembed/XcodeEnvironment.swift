@@ -51,13 +51,13 @@ public struct XcodeEnvironment {
         self.action = Action(rawValue: action) ?? .install
         self.inputsAndOutputs = inputsAndOutputs
     }
-
-    private  static func pairedInputAndOutputs() -> [(input: String, output: String)] {
+    
+    public static func pairedInputAndOutputs(environment: [String: String] = ProcessInfo.processInfo.environment) -> [(input: String, output: String)] {
         var array: [(input: String, output: String)] = []
         var count: Int = 0
         while(true) {
-            guard let input = ProcessInfo.processInfo.environment["SCRIPT_INPUT_FILE_\(count)"],
-                let output = ProcessInfo.processInfo.environment["SCRIPT_OUTPUT_FILE_\(count)"] else {
+            guard let input = environment["SCRIPT_INPUT_FILE_\(count)"],
+                let output = environment["SCRIPT_OUTPUT_FILE_\(count)"] else {
                     return array
             }
             array.append((input: input, output: output))

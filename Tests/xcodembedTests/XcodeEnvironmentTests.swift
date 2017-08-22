@@ -39,4 +39,16 @@ class XcodeEnvironmentTests: XCTestCase {
         XCTAssertEqual(subject?.inputsAndOutputs.first?.output, "b")
     }
     
+    func test_pairedInputAndOutputs_pairsInputAndOutputFiles() {
+        var dictionary: [String: String] = [:]
+        dictionary["SCRIPT_INPUT_FILE_0"] = "0_input"
+        dictionary["SCRIPT_OUTPUT_FILE_0"] = "0_output"
+        dictionary["SCRIPT_INPUT_FILE_1"] = "1_input"
+        dictionary["SCRIPT_OUTPUT_FILE_1"] = "1_output"
+        let output = XcodeEnvironment.pairedInputAndOutputs(environment: dictionary)
+        XCTAssertEqual(output[0].input, "0_input")
+        XCTAssertEqual(output[0].output, "0_output")
+        XCTAssertEqual(output[1].input, "1_input")
+        XCTAssertEqual(output[1].output, "1_output")
+    }
 }
