@@ -1,31 +1,3 @@
-# xcodembed
-A command line tool that conditionally embeds your frameworks on Xcode
-
-<img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-<a href="https://github.com/pepibumur/xcodembed/releases">
-<img src="https://img.shields.io/github/release/pepibumur/xcodembed.svg"/>
-</a>
-<a href="https://travis-ci.org/pepibumur/xcodembed">
-<img src="https://img.shields.io/travis/pepibumur/xcodembed/master.svg?style=flat"/>
-</a>
-<a href="https://github.com/pepibumur/xcodembed/blob/master/LICENSE">
-<img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
-</a>
-
-## Install
-
-You can easily install xcodembed with Homebrew:
-
-```
-brew tap pepibumur/xcodembed git@github.com:pepibumur/xcodembed.git
-brew install xcodembed 
-```
-
-## Setup
-
-## License
-
-```
 MIT License
 
 Copyright (c) 2017 Pedro Piñera
@@ -47,4 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
