@@ -29,6 +29,13 @@ brew install xcodembed
 
 ## Setup
 
+1. Git clone the repository `git clone git@github.com:pepibumur/xcodembed.git`
+2. Build with `swift build`
+
+## References
+
+- [Speeding Up Custom Script Phases](http://indiestack.com/2014/12/speeding-up-custom-script-phases/)
+
 ## License
 
 ```
