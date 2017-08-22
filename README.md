@@ -1,16 +1,22 @@
-# xcodembed
-A command line tool that conditionally embeds your frameworks on Xcode
+<p align="center">
+<a href="https://github.com/pepibumur/xcodembed">
+<img src="Assets/Logo.png" alt="XcodeGen" width="350" />
+</a>
+</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
+  <a href="https://github.com/pepibumur/xcodembed/releases">
+    <img src="https://img.shields.io/github/release/pepibumur/xcodembed.svg"/>
+  </a>
+  <a href="https://travis-ci.org/pepibumur/xcodembed">
+    <img src="https://img.shields.io/travis/pepibumur/xcodembed/master.svg?style=flat"/>
+  </a>
+  <a href="https://github.com/pepibumur/xcodembed/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
+  </a>
+</p>
 
-<img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-<a href="https://github.com/pepibumur/xcodembed/releases">
-<img src="https://img.shields.io/github/release/pepibumur/xcodembed.svg"/>
-</a>
-<a href="https://travis-ci.org/pepibumur/xcodembed">
-<img src="https://img.shields.io/travis/pepibumur/xcodembed/master.svg?style=flat"/>
-</a>
-<a href="https://github.com/pepibumur/xcodembed/blob/master/LICENSE">
-<img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
-</a>
+A command line tool that conditionally embeds your frameworks on Xcode
 
 ## Install
 
