@@ -26,7 +26,7 @@ public struct EmbedCommand {
             throw EmbedError.notFound(path: input)
         }
         if (inputPath.extension != "framework") {
-            throw EmbedError.invalidExtension
+            throw EmbedError.invalidExtension(path: input)
         }
         if architectures(framework: inputPath).filter({ xcodeEnvironment.validArchs.contains($0) }).count == 0 {
             print("Warning: Ignoring \(inputPath.lastComponent) because it does not support the current architecture")
