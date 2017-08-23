@@ -1,4 +1,6 @@
+// Reference: https://developer.apple.com/legacy/library/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-SW105
 import Foundation
+import PathKit
 
 public struct XcodeEnvironment {
 
@@ -51,6 +53,22 @@ public struct XcodeEnvironment {
         self.action = Action(rawValue: action) ?? .install
         self.inputsAndOutputs = inputsAndOutputs
     }
+    
+    // MARK: - Public
+    
+    public func destinationPath() -> Path {
+        if action == .install {
+            return Path(builtProductsDir)
+        } else {
+            return Path(targetBuildDir)
+        }
+    }
+    
+    private func frameworksPath() -> Path {
+        return destinationPath() + Path(frameworksFolderPath)
+    }
+    
+    // MARK: - Static
     
     public static func pairedInputAndOutputs(environment: [String: String] = ProcessInfo.processInfo.environment) -> [(input: String, output: String)] {
         var array: [(input: String, output: String)] = []

@@ -31,36 +31,14 @@ public struct EmbedCommand {
         if architectures(framework: inputPath).filter({ xcodeEnvironment.validArchs.contains($0) }).count == 0 {
             print("Warning: Ignoring \(inputPath.lastComponent) because it does not support the current architecture")
         }
-        try embed(inputPath: inputPath, outputPath: outputPath)
-        try copyDsyms(inputPath: inputPath)
+//        try embed(inputPath: inputPath, outputPath: outputPath)
+//        try copyDsyms(inputPath: inputPath)
     }
     
     // MARK: - Private
     
-    private func embed(inputPath: Path, outputPath: Path) throws {
-        
-    }
-    
-    private func copyDsyms(inputPath: Path) throws {
-        let inputDsymPath = inputPath + ".dSYM"
-        let outputDsymPath = destinationPath() + inputDsymPath.lastComponent
-        try inputDsymPath.copy(outputDsymPath)
-    }
-    
     private func architectures(framework: Path) -> [String] {
         return []
-    }
-    
-    private func frameworksPath() -> Path {
-        return destinationPath() + Path(xcodeEnvironment.frameworksFolderPath)
-    }
-    
-    private func destinationPath() -> Path {
-        if xcodeEnvironment.action == .install {
-            return Path(xcodeEnvironment.builtProductsDir)
-        } else {
-            return Path(xcodeEnvironment.targetBuildDir)
-        }
     }
     
 }
