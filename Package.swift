@@ -17,6 +17,7 @@ let package = Package(
           "PathKit"
         ]
       ),
+      .testTarget(name: "CoreTests", dependencies: ["Core"]),
       .target(
         name: "ProjectDescription"
       ),
@@ -27,6 +28,7 @@ let package = Package(
           .target(name: "Core"),
         ]
       ),
+      .testTarget(name: "VersionTests", dependencies: ["Version"]),
       .target(
         name: "Frameworks",
         dependencies: [
@@ -34,6 +36,7 @@ let package = Package(
           .target(name: "Core")
         ]
       ),
+      .testTarget(name: "FrameworksTests", dependencies: ["Frameworks", "PathKit"]),
       .target(
         name: "xcode",
         dependencies: [

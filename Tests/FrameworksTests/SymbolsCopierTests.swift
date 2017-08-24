@@ -2,10 +2,10 @@ import Foundation
 import XCTest
 import PathKit
 
-import Core
+import Frameworks
 
 final class SymbolsCopierTests: XCTestCase {
-    
+
     func test_copyDsyms_copiesTheFilesFromAndToTheRightPaths() {
         var from: Path!
         var to: Path!
@@ -18,5 +18,5 @@ final class SymbolsCopierTests: XCTestCase {
         XCTAssertEqual(from, "from/test.framework.dSYM")
         XCTAssertEqual(to, "frameworks/test.framework.dSYM")
     }
-    
+
 }
