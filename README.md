@@ -38,6 +38,7 @@ brew install xcode
 - [Carthage copy frameworks](https://github.com/Carthage/Carthage/blob/master/Source/carthage/CopyFrameworks.swift)
 - [CocoaPods embed frameworks script](https://github.com/CocoaPods/CocoaPods/blob/master/lib/cocoapods/generator/embed_frameworks_script.rb)
 - [Commander](https://github.com/kylef/Commander)
+- [PlistBuddy](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html)
 
 ## License
 
