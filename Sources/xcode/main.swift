@@ -9,4 +9,14 @@
         }
         frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
     }
+    $0.group("version", "set of tools to update the version of your projects", closure: { (version) in
+        let upgradeCommand = command() {
+            
+        }
+        let downgradeCommand = command() {
+            
+        }
+        version.addCommand("upgrade", "upgrades the version of your project", upgradeCommand)
+        version.addCommand("downgrade", "downgrades the version of your project", downgradeCommand)
+    })
 }.run()

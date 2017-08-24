@@ -3,6 +3,7 @@
 import Foundation
 import SwiftShell
 import PathKit
+import Core
 
 public struct EmbedCommand {
 
