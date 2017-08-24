@@ -21,7 +21,7 @@ public struct EmbedCommand {
     
     private func execute(input: String, output: String) throws {
         let inputPath = Path(input)
-        let outputPath = Path(output)
+//        let outputPath = Path(output)
         if (!inputPath.exists) {
             throw EmbedError.notFound(path: input)
         }

@@ -1,16 +1,12 @@
-// import Foundation
-// import Commander
-// import xcodembed
-
-// let allConfigsFlag = Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true)
-// let configFlag = Option("configs", "", flag: "c", description: "Array separated list of configs that need the framework to be embed (e.g. Debug,Release)")
-// let main = command(allConfigsFlag, configFlag) { (allConfigs: Bool, configs: String) in
-//     guard let xcodeEnvironment = XcodeEnvironment() else {
-//         return print("Some Xcode variables are missing, make sure that you are running the script in a build phase")
-//     }
-// //    try EmbedCommand(buildAllConfigs: allConfigs,
-// //                     configsToBuild: configs.components(separatedBy: ","),
-// //                     xcodeEnvironment: xcodeEnvironment).execute()
-// }
-// main.run()
-
+ import Foundation
+ import Commander
+ 
+ Group {
+    $0.group("frameworks", "set of tools to work with frameworks in your project") { (frameworks) in
+        let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
+                                   Option("configs", "", flag: "c", description: "Array separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (allConfigs: Bool, configs: String) in
+                                    
+        }
+        frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
+    }
+}.run()
