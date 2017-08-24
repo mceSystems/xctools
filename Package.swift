@@ -18,6 +18,9 @@ let package = Package(
         ]
       ),
       .target(
+        name: "ProjectDescription"
+      ),
+      .target(
         name: "Version",
         dependencies: [
           "xcodeproj",
