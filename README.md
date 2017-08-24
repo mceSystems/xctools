@@ -1,17 +1,17 @@
 <p align="center">
-<a href="https://github.com/pepibumur/xcodembed">
+<a href="https://github.com/pepibumur/xcode">
 <img src="Assets/Logo.png" alt="XcodeGen" width="350" />
 </a>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/pepibumur/xcodembed/releases">
-    <img src="https://img.shields.io/github/release/pepibumur/xcodembed.svg"/>
+  <a href="https://github.com/pepibumur/xcode/releases">
+    <img src="https://img.shields.io/github/release/pepibumur/xcode.svg"/>
   </a>
-  <a href="https://travis-ci.org/pepibumur/xcodembed">
-    <img src="https://img.shields.io/travis/pepibumur/xcodembed/master.svg?style=flat"/>
+  <a href="https://travis-ci.org/pepibumur/xcode">
+    <img src="https://img.shields.io/travis/pepibumur/xcode/master.svg?style=flat"/>
   </a>
-  <a href="https://github.com/pepibumur/xcodembed/blob/master/LICENSE">
+  <a href="https://github.com/pepibumur/xcode/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
 </p>
@@ -20,16 +20,16 @@ A command line tool that conditionally embeds your frameworks on Xcode
 
 ## Install
 
-You can easily install xcodembed with Homebrew:
+You can easily install xcode with Homebrew:
 
 ```
-brew tap pepibumur/xcodembed git@github.com:pepibumur/xcodembed.git
-brew install xcodembed 
+brew tap pepibumur/xcode git@github.com:pepibumur/xcode.git
+brew install xcode 
 ```
 
 ## Setup
 
-1. Git clone the repository `git clone git@github.com:pepibumur/xcodembed.git`
+1. Git clone the repository `git clone git@github.com:pepibumur/xcode.git`
 2. Build with `swift build`
 
 ## References

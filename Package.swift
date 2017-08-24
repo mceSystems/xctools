@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "xcodembed",
+    name: "xcode",
     dependencies: [
     .Package(url: "https://github.com/kylef/Commander.git", majorVersion: 0, minor: 6),
     .Package(url: "https://github.com/kareman/SwiftShell", majorVersion: 3, minor: 0),
