@@ -1,0 +1,16 @@
+included:
+  - Sources
+excluded:
+  - Assets
+  - Fixtures
+  - Tests
+  - .build
+disabled_rules:
+  - trailing_whitespace
+  - nesting
+  - cyclomatic_complexity
+  - file_length
+  - todo
+line_length:
+  warning: 150
+  error: 170

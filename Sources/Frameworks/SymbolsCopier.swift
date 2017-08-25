@@ -7,9 +7,9 @@ public protocol SymbolsCopying {
 
 public struct SymbolsCopier: SymbolsCopying {
     
-    let copy: (Path, Path) throws -> ()
+    let copy: (Path, Path) throws -> Void
     
-    public init(copy: @escaping (Path, Path) throws -> () = { try $0.copy($1) }) {
+    public init(copy: @escaping (Path, Path) throws -> Void = { try $0.copy($1) }) {
         self.copy = copy
     }
     

@@ -1,10 +1,10 @@
 import Foundation
 
 public enum Action: String {
-    case archive = "archive"
-    case install = "install"
-    case build = "build"
-    case clean = "clean"
-    case installhdrs = "installhdrs"
-    case installsrc = "installsrc"
+    case archive
+    case install
+    case build
+    case clean
+    case installhdrs
+    case installsrc
 }

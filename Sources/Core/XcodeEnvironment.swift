@@ -1,4 +1,7 @@
+// swiftlint:disable line_length
 // Reference: https://developer.apple.com/legacy/library/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html#//apple_ref/doc/uid/TP40003931-CH3-SW105
+// swiftlint:enable line_length
+
 import Foundation
 import PathKit
 
@@ -70,10 +73,11 @@ public struct XcodeEnvironment {
     
     // MARK: - Static
     
-    public static func pairedInputAndOutputs(environment: [String: String] = ProcessInfo.processInfo.environment) -> [(input: String, output: String)] {
+    public static func pairedInputAndOutputs(environment: [String: String] = ProcessInfo.processInfo.environment)
+        -> [(input: String, output: String)] {
         var array: [(input: String, output: String)] = []
         var count: Int = 0
-        while(true) {
+        while true {
             guard let input = environment["SCRIPT_INPUT_FILE_\(count)"],
                 let output = environment["SCRIPT_OUTPUT_FILE_\(count)"] else {
                     return array

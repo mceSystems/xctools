@@ -1,23 +1,22 @@
- import Foundation
- import Commander
- import PathKit
- import BuildSettings
- 
- 
+// swiftlint:disable line_length
+import Foundation
+import Commander
+import PathKit
+import BuildSettings
 
  Group {
     $0.group("frameworks", "set of tools to work with frameworks in your project") { (frameworks) in
         let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
-                                   Option("configs", "", flag: "c", description: "Array separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (allConfigs: Bool, configs: String) in
+                                   Option("configs", "", flag: "c", description: "Array separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (_: Bool, _: String) in
                                     
         }
         frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
     }
     $0.group("version", "set of tools to update the version of your projects", closure: { (version) in
-        let upgradeCommand = command() {
+        let upgradeCommand = command {
             
         }
-        let downgradeCommand = command() {
+        let downgradeCommand = command {
             
         }
         version.addCommand("upgrade", "upgrades the version of your project", upgradeCommand)
@@ -32,3 +31,4 @@
         buildSettings.addCommand("clean", "removes all the build settings from the given project/target", cleanCommand)
     })
 }.run()
+// swiftlint:enable line_length

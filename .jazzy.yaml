@@ -1,0 +1,7 @@
+author: swift-xcode
+module: xcode
+module_version: 0.0.1
+github_url: https://github.com/swift-xcode/xcodeproj
+copyright: 'Copyright © 2017 swift-xcode. All rights reserved.'
+readme: README.md
+documentation: guides/*.md

@@ -23,10 +23,10 @@ public struct EmbedCommand {
     private func execute(input: String, output: String) throws {
         let inputPath = Path(input)
 //        let outputPath = Path(output)
-        if (!inputPath.exists) {
+        if  !inputPath.exists {
             throw EmbedError.notFound(path: input)
         }
-        if (inputPath.extension != "framework") {
+        if inputPath.extension != "framework" {
             throw EmbedError.invalidExtension(path: input)
         }
         if architectures(framework: inputPath).filter({ xcodeEnvironment.validArchs.contains($0) }).count == 0 {
