@@ -16,7 +16,7 @@
   </a>
 </p>
 
-A command line tool that conditionally embeds your frameworks on Xcode
+A set of command line tools to interact with your Xcode projects.
 
 ## Install
 
