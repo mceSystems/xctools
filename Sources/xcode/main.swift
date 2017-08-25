@@ -1,6 +1,10 @@
  import Foundation
  import Commander
+ import PathKit
+ import BuildSettings
  
+ 
+
  Group {
     $0.group("frameworks", "set of tools to work with frameworks in your project") { (frameworks) in
         let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
@@ -20,17 +24,11 @@
         version.addCommand("downgrade", "downgrades the version of your project", downgradeCommand)
     })
     $0.group("build-settings", "a set of tools to interact with your project/target build settings", closure: { (buildSettings) in
-        let cleanCommand = command {
-            
+        let cleanCommand = command(Option("target", "", flag: "t", description: "The target whose build settings will be cleaned"),
+                                   Argument("project", description: "The project to execute the command on")) { (target: String, project: String) in
+                                    try BuildSettingsCleanCommand(projectPath: Path(project),
+                                                                  target: target).execute()
         }
-        let get = command {
-            
-        }
-        let getAll = command {
-            
-        }
-        let set = command {
-            
-        }
+        buildSettings.addCommand("clean", "removes all the build settings from the given project/target", cleanCommand)
     })
 }.run()

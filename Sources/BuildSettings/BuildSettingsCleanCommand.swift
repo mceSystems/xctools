@@ -9,17 +9,23 @@ public struct BuildSettingsCleanCommand {
     private let project: XcodeProj
     private let target: String?
     private let projectPath: Path
+    private let projectWriter: (XcodeProj, Path) throws -> ()
     
     // MARK: - Init
     
-    public init(projectPath: Path, target: String? = nil) throws {
+    public init(projectPath: Path,
+                target: String? = nil) throws {
         self.init(project: try XcodeProj(path: projectPath), projectPath: projectPath, target: target)
     }
     
-    public init(project: XcodeProj, projectPath: Path, target: String? = nil) {
+    public init(project: XcodeProj,
+                projectPath: Path,
+                target: String? = nil,
+                projectWriter: @escaping (XcodeProj, Path) throws -> () = { try $0.write(path: $1) }) {
         self.project = project
         self.projectPath = projectPath
         self.target = target
+        self.projectWriter = projectWriter
     }
     
     // MARK: - Execute
@@ -38,7 +44,7 @@ public struct BuildSettingsCleanCommand {
         } else {
             project.pbxproj.projects.forEach { cleanConfigurationList(project.pbxproj, $0.buildConfigurationList) }
         }
-        try project.write(path: projectPath)
+        try self.projectWriter(project, projectPath)
     }
     
 }

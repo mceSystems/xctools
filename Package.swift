@@ -19,9 +19,6 @@ let package = Package(
       ),
       .testTarget(name: "CoreTests", dependencies: ["Core"]),
       .target(
-        name: "ProjectDescription"
-      ),
-      .target(
         name: "Version",
         dependencies: [
           "xcodeproj",
