@@ -8,7 +8,7 @@ let package = Package(
       .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.6.0")),
       .package(url: "https://github.com/kareman/SwiftShell.git", .upToNextMinor(from: "3.0.1")),
       .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.8.0")),
-      .package(url: "https://github.com/carambalabs/xcodeproj.git", .upToNextMinor(from: "0.1.0"))
+      .package(url: "https://github.com/carambalabs/xcodeproj.git", .upToNextMinor(from: "0.1.1"))
     ],
     targets: [
       .target(

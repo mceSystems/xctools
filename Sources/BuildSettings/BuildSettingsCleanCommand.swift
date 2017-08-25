@@ -35,7 +35,7 @@ public struct BuildSettingsCleanCommand {
             guard let configurationList = pbxproj.configurationLists.filter({ $0.reference == configurationListReference }).first else { return }
             configurationList.buildConfigurations.forEach { (buildConfigurationReference) in
                 guard let buildConfiguration = pbxproj.buildConfigurations.filter({ $0.reference == buildConfigurationReference }).first else { return }
-                buildConfiguration.buildSettings.dictionary.removeAll()
+                buildConfiguration.buildSettings.removeAll()
             }
         }
         if let target = target {
