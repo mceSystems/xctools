@@ -8,7 +8,7 @@ require 'colorize'
 def generate_docs
   print "> Executing tests"
   sh "swift package generate-xcodeproj"
-  sh "jazzy --clean --sdk macosx --xcodebuild-arguments -project xcode.xcodeproj -scheme xcode --skip-undocumented --no-download-badge"
+  sh "jazzy --clean --sdk macosx --xcodebuild-arguments -scheme,xcode --skip-undocumented --no-download-badge"
 end
 
 def any_git_changes?
