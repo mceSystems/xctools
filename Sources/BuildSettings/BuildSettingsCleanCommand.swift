@@ -2,7 +2,7 @@ import Foundation
 import PathKit
 import xcodeproj
 
-public struct VersionCleanCommand {
+public struct BuildSettingsCleanCommand {
     
     // MARK: - Properties
     
