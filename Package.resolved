@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/carambalabs/xcodeproj.git",
         "state": {
           "branch": null,
-          "revision": "6f0cbcbd6fd00067f7cb73ffad1f45ac5362b4e9",
-          "version": "0.0.9"
+          "revision": "90d22b4c831de9cf6c82076ca55744462faa1d15",
+          "version": "0.1.0"
         }
       }
     ]

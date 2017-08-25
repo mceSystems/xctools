@@ -8,7 +8,7 @@ let package = Package(
       .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.6.0")),
       .package(url: "https://github.com/kareman/SwiftShell.git", .upToNextMinor(from: "3.0.1")),
       .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.8.0")),
-      .package(url: "https://github.com/carambalabs/xcodeproj.git", .upToNextMinor(from: "0.0.9"))
+      .package(url: "https://github.com/carambalabs/xcodeproj.git", .upToNextMinor(from: "0.1.0"))
     ],
     targets: [
       .target(
@@ -36,6 +36,14 @@ let package = Package(
           .target(name: "Core")
         ]
       ),
+      .target(
+        name: "BuildSettings",
+        dependencies: [
+          "xcodeproj",
+          .target(name: "Core"),
+        ]
+      ),
+      .testTarget(name: "BuildSettingsTests", dependencies: ["BuildSettings"]),
       .testTarget(name: "FrameworksTests", dependencies: ["Frameworks", "PathKit"]),
       .target(
         name: "xcode",
@@ -43,7 +51,8 @@ let package = Package(
           "Commander",
           .target(name: "Core"),
           .target(name: "Frameworks"),
-          .target(name: "Version")
+          .target(name: "Version"),
+          .target(name: "BuildSettings")
         ]
       ),
     ],
