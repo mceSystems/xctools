@@ -19,4 +19,18 @@
         version.addCommand("upgrade", "upgrades the version of your project", upgradeCommand)
         version.addCommand("downgrade", "downgrades the version of your project", downgradeCommand)
     })
+    $0.group("build-settings", "a set of tools to interact with your project/target build settings", closure: { (buildSettings) in
+        let cleanCommand = command {
+            
+        }
+        let get = command {
+            
+        }
+        let getAll = command {
+            
+        }
+        let set = command {
+            
+        }
+    })
 }.run()

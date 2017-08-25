@@ -25,6 +25,7 @@ let package = Package(
         name: "Version",
         dependencies: [
           "xcodeproj",
+          "PathKit",
           .target(name: "Core"),
         ]
       ),
