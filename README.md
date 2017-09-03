@@ -32,6 +32,10 @@ brew install xcode
 1. Git clone the repository `git clone git@github.com:swift-xcode/xcode.git`
 2. Build with `swift build`
 
+## Sponsor xcode
+
+<a href="https://app.codesponsor.io/link/Wubfoy6Ufnr9x5TgqoEAgegC/swift-xcode/xcode" rel="nofollow"><img src="https://app.codesponsor.io/embed/Wubfoy6Ufnr9x5TgqoEAgegC/swift-xcode/xcode.svg" style="width: 888px; height: 68px;" alt="Sponsor" /></a>
+
 ## References
 
 - [Speeding Up Custom Script Phases](http://indiestack.com/2014/12/speeding-up-custom-script-phases/)
