@@ -33,7 +33,7 @@ class XcodeEnvironmentTests: XCTestCase {
         XCTAssertEqual(subject?.codeSigningAllowed, "CODE_SIGNING_ALLOWED")
         XCTAssertEqual(subject?.expandedCodeSignIdentityName, "EXPANDED_CODE_SIGN_IDENTITY_NAME")
         XCTAssertEqual(subject?.otherCodeSignFlags, "OTHER_CODE_SIGN_FLAGS")
-        XCTAssertEqual(subject?.validArchs, "VALID_ARCHS")
+        XCTAssertEqual(subject?.validArchs ?? [], ["VALID_ARCHS"])
         XCTAssertEqual(subject?.action, .archive)
         XCTAssertEqual(subject?.inputsAndOutputs.first?.input, "a")
         XCTAssertEqual(subject?.inputsAndOutputs.first?.output, "b")

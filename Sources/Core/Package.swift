@@ -1,4 +1,5 @@
 // Reference: https://github.com/Carthage/Carthage/blob/53da2e143306ba502e468842667ee8cd763d5a5b/Source/CarthageKit/Xcode.swift
+// Reference: https://pspdfkit.com/guides/ios/current/faq/framework-size/#toc_dsym-and-bcsymbolmaps
 import Foundation
 import PathKit
 import SwiftShell
@@ -194,5 +195,84 @@ public struct Package {
         try? FileManager.default.removeItem(atPath: path.string)
     }
 
+    
+    // MARK: - UUID
+    
+    /// Returns a set of UUIDs for each architecture present in the package.
+    ///
+    /// - Returns: set of UUIDs.
+    /// - Throws: an error if the UUIDs cannot be obtained.
+    public func uuids() throws -> Set<UUID> {
+        switch self.packageType() {
+        case .framework?, .bundle?:
+            return try uuidsForFramework()
+        case .dSYM?:
+            return try uuidsForDSYM()
+        default:
+            return Set()
+        }
+    }
 
+    /// Returns a set of UUIDs for each architecture present in the framework package.
+    ///
+    /// - Returns: set of UUIDs.
+    /// - Throws: an error if the UUIDs cannot be obtained.
+    func uuidsForFramework() throws -> Set<UUID> {
+        guard let binaryPath = binaryPath() else { return Set() }
+        return try uuidsFromDwarfdump(path: binaryPath)
+    }
+    
+    /// Returns a set of UUIDs for each architecture present in the DSYM package.
+    ///
+    /// - Returns: set of UUIDs.
+    /// - Throws: an error if the UUIDs cannot be obtained.
+    func uuidsForDSYM() throws -> Set<UUID> {
+        return try uuidsFromDwarfdump(path: self.path)
+    }
+    
+    /// Returns a set of UUIDs for each architecture present.
+    ///
+    /// - Parameter path: url of the file whose architectures UUIDs will be returned.
+    /// - Returns: set of UUIDs.
+    /// - Throws: an error if the UUIDs cannot be obtained.
+    func uuidsFromDwarfdump(path: Path) throws -> Set<UUID> {
+        let result = run("/usr/bin/xcrun", "dwarfdump", "--uuid", path.string)
+        if let error = result.error {
+            throw error
+        }
+        var uuidCharacterSet = CharacterSet()
+        uuidCharacterSet.formUnion(.letters)
+        uuidCharacterSet.formUnion(.decimalDigits)
+        uuidCharacterSet.formUnion(CharacterSet(charactersIn: "-"))
+        let scanner = Scanner(string: result.stdout)
+        var uuids = Set<UUID>()
+        // The output of dwarfdump is a series of lines formatted as follows
+        // for each architecture:
+        //
+        //     UUID: <UUID> (<Architecture>) <PathToBinary>
+        //
+        while !scanner.isAtEnd {
+            scanner.scanString("UUID: ", into: nil)
+            
+            var uuidString: NSString?
+            scanner.scanCharacters(from: uuidCharacterSet, into: &uuidString)
+            
+            if let uuidString = uuidString as String?, let uuid = UUID(uuidString: uuidString) {
+                uuids.insert(uuid)
+            }
+            // Scan until a newline or end of file.
+            scanner.scanUpToCharacters(from: .newlines, into: nil)
+        }
+        return uuids
+    }
+    
+    /// Returns framework bcsymbolmaps paths.
+    ///
+    /// - Returns: bcsymbolmaps paths.
+    /// - Throws: an error if the bcsymbolmaps cannot be obtained.
+    public func bcSymbolMapsForFramework() throws -> [Path] {
+        let parentPath = path.parent()
+        let frameworkUUIDs = try uuids()
+        return frameworkUUIDs.map({ parentPath + Path($0.uuidString) + ".bcsymbolmap" })
+    }
 }
