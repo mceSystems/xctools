@@ -1,5 +1,5 @@
 import Foundation
 
-public struct FrameworkEmbedder {
+public class FrameworkEmbedder {
     
 }

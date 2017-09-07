@@ -5,7 +5,7 @@ public protocol SymbolsCopying {
     func copyDsyms(inputPath: Path, destinationPath: Path) throws
 }
 
-public struct SymbolsCopier: SymbolsCopying {
+public class SymbolsCopier: SymbolsCopying {
     
     let copy: (Path, Path) throws -> Void
     

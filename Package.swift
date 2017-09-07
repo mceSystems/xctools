@@ -14,7 +14,8 @@ let package = Package(
       .target(
         name: "Core",
         dependencies: [
-          "PathKit"
+          "PathKit",
+          "SwiftShell"
         ]
       ),
       .testTarget(name: "CoreTests", dependencies: ["Core"]),

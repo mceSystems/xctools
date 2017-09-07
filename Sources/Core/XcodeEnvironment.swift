@@ -20,7 +20,7 @@ public struct XcodeEnvironment {
     public let codeSigningAllowed: String
     public let expandedCodeSignIdentityName: String
     public let otherCodeSignFlags: String
-    public let validArchs: String
+    public let validArchs: [String]
     public let action: Action
     public let inputsAndOutputs: [(input: String, output: String)]
 
@@ -52,7 +52,7 @@ public struct XcodeEnvironment {
         self.codeSigningAllowed = codeSigningAllowed
         self.expandedCodeSignIdentityName = expandedCodeSignIdentityName
         self.otherCodeSignFlags = otherCodeSignFlags
-        self.validArchs = validArchs
+        self.validArchs = validArchs.components(separatedBy: " ")
         self.action = Action(rawValue: action) ?? .install
         self.inputsAndOutputs = inputsAndOutputs
     }
