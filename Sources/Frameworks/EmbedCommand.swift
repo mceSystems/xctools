@@ -67,15 +67,25 @@ public class EmbedCommand {
             print("Warning: Ignoring \(inputPath.lastComponent) because it does not support the current architecture")
         }
         let inputDsymPath = Path(inputPath.string + ".dSYM")
-        let outputDsymPath = outputPath + inputDsymPath.lastComponent
+        let outputDsymPath = outputPath.parent() + inputDsymPath.lastComponent
         
         // Frameworks
-        try outputPath.parent().mkpath()
+        if !outputPath.parent().exists {
+            try outputPath.parent().mkpath()
+        }
+        if outputPath.exists {
+            try outputPath.delete()
+        }
         try inputPath.copy(outputPath)
         try Package(path: outputPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
         
         // Symbols
-        try outputDsymPath.parent().mkpath()
+        if !outputDsymPath.parent().exists {
+            try outputDsymPath.parent().mkpath()
+        }
+        if outputDsymPath.exists {
+            try outputDsymPath.delete()
+        }
         try inputDsymPath.copy(outputDsymPath)
         try Package(path: outputDsymPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
 

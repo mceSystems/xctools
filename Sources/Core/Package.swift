@@ -37,7 +37,7 @@ public struct Package {
         guard let packageType = packageType() else { return nil }
         switch packageType {
         case .framework, .bundle:
-            return (bundle.object(forInfoDictionaryKey: "CFBundleExecutable") as? String).map({Path($0)})
+            return path + (bundle.object(forInfoDictionaryKey: "CFBundleExecutable") as? String).map({Path($0)})!
         case .dSYM:
             let binaryName = path.url.deletingPathExtension().deletingPathExtension().lastPathComponent
             if !binaryName.isEmpty {
@@ -145,7 +145,9 @@ public struct Package {
         let architecturesInPackage = architectures()
         let architecturesToStrip = architecturesInPackage.filter({!keepingArchitectures.contains($0)})
         try architecturesToStrip.forEach({
-            try stripArchitecture(packagePath: path, architecture: $0)
+            if let binaryPath = binaryPath() {
+                try stripArchitecture(packagePath: binaryPath, architecture: $0)
+            }
         })
     }
     

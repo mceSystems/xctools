@@ -25,6 +25,36 @@ public struct XcodeEnvironment {
     public let inputsAndOutputs: [(input: String, output: String)]
 
     // MARK: - Init
+    
+    public init(configuration: String,
+                configurationBuildDir: String,
+                frameworksFolderPath: String,
+                builtProductsDir: String,
+                targetBuildDir: String,
+                dwardDsymFolderPath: String,
+                expandedCodeSignIdentity: String,
+                codeSignRequired: String,
+                codeSigningAllowed: String,
+                expandedCodeSignIdentityName: String,
+                otherCodeSignFlags: String,
+                validArchs: [String],
+                action: Action,
+                inputsAndOutputs: [(input: String, output: String)]) {
+        self.configuration = configuration
+        self.configurationBuildDir = configurationBuildDir
+        self.frameworksFolderPath = frameworksFolderPath
+        self.builtProductsDir = builtProductsDir
+        self.targetBuildDir = targetBuildDir
+        self.dwardDsymFolderPath = dwardDsymFolderPath
+        self.expandedCodeSignIdentity = expandedCodeSignIdentity
+        self.codeSignRequired = codeSignRequired
+        self.codeSigningAllowed = codeSigningAllowed
+        self.expandedCodeSignIdentityName = expandedCodeSignIdentityName
+        self.otherCodeSignFlags = otherCodeSignFlags
+        self.validArchs = validArchs
+        self.action = action
+        self.inputsAndOutputs = inputsAndOutputs
+    }
 
     public init?(environment: [String: String] = ProcessInfo.processInfo.environment,
                  inputsAndOutputs: [(input: String, output: String)] = XcodeEnvironment.pairedInputAndOutputs()) {
