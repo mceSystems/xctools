@@ -33,27 +33,15 @@ public class EmbedCommand {
     let buildAllConfigs: Bool
     let configsToBuild: [String]
     let xcodeEnvironment: XcodeEnvironment
-    let packageCopier: PackageCopying
     
     // MARK: - Init
     
-    init(buildAllConfigs: Bool,
+    public init(buildAllConfigs: Bool,
          configsToBuild: [String],
-         xcodeEnvironment: XcodeEnvironment,
-         packageCopier: PackageCopying) {
+         xcodeEnvironment: XcodeEnvironment) {
         self.buildAllConfigs = buildAllConfigs
         self.configsToBuild = configsToBuild
         self.xcodeEnvironment = xcodeEnvironment
-        self.packageCopier = packageCopier
-    }
-    
-    public convenience init(buildAllConfigs: Bool,
-                            configsToBuild: [String],
-                            xcodeEnvironment: XcodeEnvironment) {
-        self.init(buildAllConfigs: buildAllConfigs,
-                  configsToBuild: configsToBuild,
-                  xcodeEnvironment: xcodeEnvironment,
-                  packageCopier: PackageCopier())
     }
 
     // MARK: - Public
@@ -93,7 +81,7 @@ public class EmbedCommand {
 
         // BCSymbolMap
         if xcodeEnvironment.action == .install {
-            try package.bcSymbolMapsForFramework()
+            try Package(path: inputPath).bcSymbolMapsForFramework()
                 .forEach{ (bcInputPath) in
                     let bcOputputPath = Path(xcodeEnvironment.builtProductsDir) + bcInputPath.lastComponent
                     if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
