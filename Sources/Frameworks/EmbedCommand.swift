@@ -5,41 +5,6 @@ import SwiftShell
 import PathKit
 import Core
 
-// MARK: - PackageCopying
-
-public protocol PackageCopying {
-    func copy(from: Path, to: Path, keepingArchitectures: [String]) throws
-}
-
-// MARK: - PackageCopier
-
-public class PackageCopier: PackageCopying {
-    
-    // MARK: - Attributes
-    
-    let copy: (Path, Path) throws -> Void
-    let strip: (Package, [String]) throws -> Void
-
-    // MARK: - Init
-    
-    public init(copy: @escaping (Path, Path) throws -> Void = { (from, to) in
-                    if (!to.parent().exists) { try to.mkpath() }
-                    try from.copy(to)
-                },
-                strip: @escaping (Package, [String]) throws -> Void = { try $0.strip(keepingArchitectures: $1) }) {
-        self.copy = copy
-        self.strip = strip
-    }
-    
-    // MARK: - FrameworkEmbedding
-    
-    public func copy(from: Path, to: Path, keepingArchitectures: [String]) throws {
-        try copy(from, to)
-        try strip(Package(path: to), keepingArchitectures)
-    }
-    
-}
-
 // MARK: - EmbedError
 
 /// Embed error.
@@ -115,21 +80,26 @@ public class EmbedCommand {
         }
         let inputDsymPath = Path(inputPath.string + ".dSYM")
         let outputDsymPath = outputPath + inputDsymPath.lastComponent
-        try packageCopier.copy(from: inputPath, to: outputPath, keepingArchitectures: xcodeEnvironment.validArchs)
-        try packageCopier.copy(from: inputDsymPath, to: outputDsymPath, keepingArchitectures: xcodeEnvironment.validArchs)
+        
+        // Frameworks
+        try outputPath.parent().mkpath()
+        try inputPath.copy(outputPath)
+        try Package(path: outputPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
+        
+        // Symbols
+        try outputDsymPath.parent().mkpath()
+        try inputDsymPath.copy(outputDsymPath)
+        try Package(path: outputDsymPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
+
+        // BCSymbolMap
         if xcodeEnvironment.action == .install {
-            try copyBCSymbolMap(package: inputPackage)
+            try package.bcSymbolMapsForFramework()
+                .forEach{ (bcInputPath) in
+                    let bcOputputPath = Path(xcodeEnvironment.builtProductsDir) + bcInputPath.lastComponent
+                    if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
+                    try bcInputPath.copy(bcOputputPath)
+            }
         }
     }
-    
-    private func copyBCSymbolMap(package: Package) throws {
-        try package.bcSymbolMapsForFramework()
-            .forEach{ (bcInputPath) in
-                let bcOputputPath = Path(xcodeEnvironment.builtProductsDir) + bcInputPath.lastComponent
-                if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
-                try bcInputPath.copy(bcOputputPath)
-        }
-    }
-    
     
 }
