@@ -4,6 +4,8 @@ import PathKit
 import Core
 import Frameworks
 import PathKit
+import TestsFoundation
+import Core
 
 // MARK: - EmbedErrorTests
 
@@ -17,12 +19,11 @@ final class EmbedErrorTests: XCTestCase {
         XCTAssertEqual(EmbedError.invalidExtension(path: "test/").description, "File doesn't have a .framework extension: test/")
     }
     
-    
 }
 
 // MARK: - EmbedCommandTests
 
-final class EmbedCommandTests: XCTestCase {
+final class EmbedCommandTests: XCIntegrationTestCase {
     
     var subject: EmbedCommand!
     var buildAllConfigs: Bool!
@@ -43,8 +44,46 @@ final class EmbedCommandTests: XCTestCase {
         try? Path(outputPath()).mkdir()
     }
     
-    func test_execute() {
+    func test_execute_copiesTheFramework() {
         try? subject.execute()
+        XCTAssertTrue(Path(outputPath()).exists)
+    }
+    
+    func test_execute_stripsTheArchitectures() {
+        XCTAssertEqual(Package(path: Path(inputPath())).architectures(), ["armv7", "arm64"])
+        try? subject.execute()
+        XCTAssertEqual(Package(path: Path(outputPath())).architectures(), ["armv7"])
+    }
+    
+    func test_execute_copiesTheFrameworkSymbols() {
+        let outputDsymsPath = Path(outputPath() + ".dSYM")
+        try? subject.execute()
+        XCTAssertTrue(outputDsymsPath.exists)
+    }
+    
+    func test_execute_stripsTheArchitecturesFromTheFrameworkSymbols() {
+        let inputDsymsPath = Path(inputPath() + ".dSYM")
+        let outputDsymsPath = Path(outputPath() + ".dSYM")
+        XCTAssertEqual(Package(path: inputDsymsPath).architectures(), ["armv7", "arm64"])
+        try? subject.execute()
+        XCTAssertEqual(Package(path: outputDsymsPath).architectures(), ["armv7"])
+    }
+    
+    func test_execute_doesNotCopyTheBCSymbolMaps_whenTheActionIsNotInstall() {
+        subject = EmbedCommand(buildAllConfigs: false,
+                               configsToBuild: ["Debug"],
+                               configuration: "Debug",
+                               inputsAndOutputs:  [(input: inputPath(), output: outputPath())],
+                               validArchs: ["armv7"],
+                               action: .archive,
+                               builtProductsDir: Path(outputPath()).parent().string)
+        try? subject.execute()
+        XCTAssertEqual(Path(outputPath()).parent().glob("*.bcsymbolmap").count, 0)
+    }
+    
+    func test_execute_copyTheBCSymbols_whenTheActionIsInstall() {
+        try? subject.execute()
+        XCTAssertEqual(Path(outputPath()).parent().glob("*.bcsymbolmap").count, 2)
     }
     
     override func tearDown() {
@@ -58,7 +97,7 @@ final class EmbedCommandTests: XCTestCase {
     }
     
     private func outputPath() -> String {
-        return (Path(#file) + "../../../Fixtures/tmp/Test.framework").string
+        return (tmpPath + "Test.framework").string
     }
     
     private func setXcodeEnvironment(action: Core.Action = .install,

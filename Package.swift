@@ -54,7 +54,7 @@ let package = Package(
           .target(name: "BuildSettings")
         ]
       ),
-      .testTarget(name: "TestsFoundation")
+      .target(name: "TestsFoundation", dependencies: ["PathKit"] )
     ],
     swiftLanguageVersions: [3]
 )

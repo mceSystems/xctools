@@ -5,15 +5,6 @@ import SwiftShell
 import PathKit
 import Core
 
-/////
-/*
- TODO
- ========
- - Tests
- - Create XCIntegrationTestCase with a temporary directory.
- */
-////
-
 // MARK: - EmbedError
 
 /// Embed error.
