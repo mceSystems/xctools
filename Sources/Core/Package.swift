@@ -19,9 +19,9 @@ public struct Package {
     
     // MARK: - Constants
     
-    struct Constants {
-        static var lipoArchitecturesMessage: String = "Architectures in the fat file:"
-        static var lipoNonFatFileMessage: String = "Non-fat file:"
+    enum Constants {
+        static let lipoArchitecturesMessage: String = "Architectures in the fat file:"
+        static let lipoNonFatFileMessage: String = "Non-fat file:"
     }
     
     // MARK: - Attributes
