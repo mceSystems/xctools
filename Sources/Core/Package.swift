@@ -8,7 +8,7 @@ import SwiftShell
 ///
 /// - framework: the package is a framework.
 /// - bundle: the package is a bundle with resoureces.
-/// - dSYM: the pckage contains dynamic symbols.
+/// - dSYM: the package contains dynamic symbols.
 public enum PackageType: String {
     case framework = "FMWK"
     case bundle = "BNDL"
@@ -16,6 +16,13 @@ public enum PackageType: String {
 }
 
 public struct Package {
+    
+    // MARK: - Constants
+    
+    struct Constants {
+        static var lipoArchitecturesMessage: String = "Architectures in the fat file:"
+        static var lipoNonFatFileMessage: String = "Non-fat file:"
+    }
     
     // MARK: - Attributes
     
@@ -61,12 +68,12 @@ public struct Package {
     /// - Returns: all the supported architectures.
     public func architectures() -> [String] {
         guard let _binaryPath = binaryPath() else { return [] }
-        let lipoResult = run("/usr/bin/xcrun", "lipo", "-info", _binaryPath.string)
+        let lipoResult = System.xcrun("lipo", "-info", _binaryPath.string)
         var characterSet = CharacterSet.alphanumerics
         characterSet.insert(charactersIn: " _-")
         let scanner = Scanner(string: lipoResult.stdout)
         
-        if scanner.scanString("Architectures in the fat file:", into: nil) {
+        if scanner.scanString(Constants.lipoArchitecturesMessage, into: nil) {
             // The output of "lipo -info PathToBinary" for fat files
             // looks roughly like so:
             //
@@ -83,7 +90,7 @@ public struct Package {
                 return components
             }
         }
-        if scanner.scanString("Non-fat file:", into: nil) {
+        if scanner.scanString(Constants.lipoNonFatFileMessage, into: nil) {
             // The output of "lipo -info PathToBinary" for thin
             // files looks roughly like so:
             //
@@ -158,7 +165,7 @@ public struct Package {
     ///   - architecture: architecture to be stripped.
     /// - Throws: throws an error if the stripping fails.
     func stripArchitecture(packagePath: Path, architecture: String) throws {
-        let output = run("/usr/bin/xcrun", "lipo", "-remove", architecture, "-output", packagePath.string, packagePath.string)
+        let output = System.xcrun("lipo", "-remove", architecture, "-output", packagePath.string, packagePath.string)
         if let error = output.error {
             throw error
         }
@@ -238,7 +245,7 @@ public struct Package {
     /// - Returns: set of UUIDs.
     /// - Throws: an error if the UUIDs cannot be obtained.
     func uuidsFromDwarfdump(path: Path) throws -> Set<UUID> {
-        let result = run("/usr/bin/xcrun", "dwarfdump", "--uuid", path.string)
+        let result = System.xcrun("dwarfdump", "--uuid", path.string)
         if let error = result.error {
             throw error
         }
