@@ -116,6 +116,7 @@ public class EmbedCommand {
                 .forEach{ (bcInputPath) in
                     let bcOputputPath = Path(builtProductsDir) + bcInputPath.lastComponent
                     if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
+                    if bcOputputPath.exists { try bcOputputPath.delete() }
                     try bcInputPath.copy(bcOputputPath)
             }
         }

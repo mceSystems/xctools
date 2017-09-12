@@ -282,6 +282,6 @@ public struct Package {
     public func bcSymbolMapsForFramework() throws -> [Path] {
         let parentPath = path.parent()
         let frameworkUUIDs = try uuids()
-        return frameworkUUIDs.map({ parentPath + Path($0.uuidString) + ".bcsymbolmap" })
+        return frameworkUUIDs.map({ parentPath + Path("\($0.uuidString)).bcsymbolmap") })
     }
 }
