@@ -5,6 +5,15 @@ import SwiftShell
 import PathKit
 import Core
 
+/////
+/*
+ TODO
+ ========
+ - Tests
+ - Create XCIntegrationTestCase with a temporary directory.
+ */
+////
+
 // MARK: - EmbedError
 
 /// Embed error.
@@ -32,25 +41,37 @@ public class EmbedCommand {
     
     let buildAllConfigs: Bool
     let configsToBuild: [String]
-    let xcodeEnvironment: XcodeEnvironment
+    let configuration: String
+    let inputsAndOutputs: [(input: String, output: String)]
+    let validArchs: [String]
+    let action: Action
+    let builtProductsDir: String
     
     // MARK: - Init
     
     public init(buildAllConfigs: Bool,
-         configsToBuild: [String],
-         xcodeEnvironment: XcodeEnvironment) {
+                configsToBuild: [String],
+                configuration: String,
+                inputsAndOutputs: [(input: String, output: String)],
+                validArchs: [String],
+                action: Action,
+                builtProductsDir: String) {
         self.buildAllConfigs = buildAllConfigs
         self.configsToBuild = configsToBuild
-        self.xcodeEnvironment = xcodeEnvironment
+        self.configuration = configuration
+        self.inputsAndOutputs = inputsAndOutputs
+        self.validArchs = validArchs
+        self.action = action
+        self.builtProductsDir = builtProductsDir
     }
-
+    
     // MARK: - Public
     
     public func execute() throws {
-        if !configsToBuild.contains(xcodeEnvironment.configuration) && !buildAllConfigs {
-            print("Warning: Not embedding frameworks because the following configuration is being built: \(xcodeEnvironment.configuration)")
+        if !configsToBuild.contains(configuration) && !buildAllConfigs {
+            print("Warning: Not embedding frameworks because the following configuration is being built: \(configuration)")
         }
-        try self.xcodeEnvironment.inputsAndOutputs.forEach(self.embed)
+        try inputsAndOutputs.forEach(self.embed)
     }
     
     private func embed(input: String, output: String) throws {
@@ -63,7 +84,7 @@ public class EmbedCommand {
             throw EmbedError.notFound(path: input)
         }
         let inputPackage = Package(path: inputPath)
-        if inputPackage.architectures().filter({ xcodeEnvironment.validArchs.contains($0) }).count == 0 {
+        if inputPackage.architectures().filter({ validArchs.contains($0) }).count == 0 {
             print("Warning: Ignoring \(inputPath.lastComponent) because it does not support the current architecture")
         }
         let inputDsymPath = Path(inputPath.string + ".dSYM")
@@ -77,7 +98,7 @@ public class EmbedCommand {
             try outputPath.delete()
         }
         try inputPath.copy(outputPath)
-        try Package(path: outputPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
+        try Package(path: outputPath).strip(keepingArchitectures: validArchs)
         
         // Symbols
         if !outputDsymPath.parent().exists {
@@ -87,13 +108,13 @@ public class EmbedCommand {
             try outputDsymPath.delete()
         }
         try inputDsymPath.copy(outputDsymPath)
-        try Package(path: outputDsymPath).strip(keepingArchitectures: xcodeEnvironment.validArchs)
-
+        try Package(path: outputDsymPath).strip(keepingArchitectures: validArchs)
+        
         // BCSymbolMap
-        if xcodeEnvironment.action == .install {
+        if action == .install {
             try Package(path: inputPath).bcSymbolMapsForFramework()
                 .forEach{ (bcInputPath) in
-                    let bcOputputPath = Path(xcodeEnvironment.builtProductsDir) + bcInputPath.lastComponent
+                    let bcOputputPath = Path(builtProductsDir) + bcInputPath.lastComponent
                     if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
                     try bcInputPath.copy(bcOputputPath)
             }

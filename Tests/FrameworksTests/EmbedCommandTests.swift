@@ -33,12 +33,13 @@ final class EmbedCommandTests: XCTestCase {
         super.setUp()
         buildAllConfigs = false
         configsToBuild = ["Debug"]
-        setXcodeEnvironment(builtProductsDir: Path(outputPath()).parent().string,
-                            targetBuildDir: Path(outputPath()).parent().string,
-                            inputsAndOutputs: [(input: inputPath(), output: outputPath())])
-        subject = EmbedCommand(buildAllConfigs: buildAllConfigs,
-                               configsToBuild: configsToBuild,
-                               xcodeEnvironment: xcodeEnvironment)
+        subject = EmbedCommand(buildAllConfigs: false,
+                               configsToBuild: ["Debug"],
+                               configuration: "Debug",
+                               inputsAndOutputs:  [(input: inputPath(), output: outputPath())],
+                               validArchs: ["armv7"],
+                               action: .install,
+                               builtProductsDir: Path(outputPath()).parent().string)
         try? Path(outputPath()).mkdir()
     }
     
