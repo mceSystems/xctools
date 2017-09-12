@@ -130,9 +130,9 @@ public struct Package {
     /// - Throws: throws an error if the stripping fails.
     func stripFramework(keepingArchitectures: [String]) throws {
         try stripArchitectures(keepingArchitectures: keepingArchitectures)
-        stripHeaders(frameworkPath: path)
-        stripPrivateHeaders(frameworkPath: path)
-        stripModulesDirectory(frameworkPath: path)
+        try stripHeaders(frameworkPath: path)
+        try stripPrivateHeaders(frameworkPath: path)
+        try stripModulesDirectory(frameworkPath: path)
     }
     
     /// Strips unnecessary architectures from a DSYM package.
@@ -174,23 +174,23 @@ public struct Package {
     /// Strips the headers from a given framework.
     ///
     /// - Parameter frameworkPath: path to the framework whose headers will be stripped.
-    func stripHeaders(frameworkPath: Path) {
-        stripDirectory(name: "Headers", from: frameworkPath)
+    func stripHeaders(frameworkPath: Path) throws {
+        try stripDirectory(name: "Headers", from: frameworkPath)
     }
     
     /// Strips the private headers from a given framework.
     ///
     /// - Parameter frameworkPath: path to the framework whose private headers will be stripped.
-    func stripPrivateHeaders(frameworkPath: Path) {
-        stripDirectory(name: "PrivateHeaders", from: frameworkPath)
+    func stripPrivateHeaders(frameworkPath: Path) throws {
+        try stripDirectory(name: "PrivateHeaders", from: frameworkPath)
     }
     
     
     /// Strips the modules directory from a given framework.
     ///
     /// - Parameter frameworkPath: path to the framework whose modules directory will be stripped.
-    func stripModulesDirectory(frameworkPath: Path) {
-        stripDirectory(name: "Modules", from: frameworkPath)
+    func stripModulesDirectory(frameworkPath: Path) throws {
+        try stripDirectory(name: "Modules", from: frameworkPath)
     }
     
     
@@ -199,9 +199,11 @@ public struct Package {
     /// - Parameters:
     ///   - name: name of the folder that will be stripped from the framework.
     ///   - frameworkPath: path to the framework whose directory will be stripped.
-    func stripDirectory(name: String, from frameworkPath: Path) {
+    func stripDirectory(name: String, from frameworkPath: Path) throws {
         let path = frameworkPath + Path(name)
-        try? FileManager.default.removeItem(atPath: path.string)
+        if path.exists {
+            try FileManager.default.removeItem(atPath: path.string)
+        }
     }
 
     

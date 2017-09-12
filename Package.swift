@@ -18,7 +18,7 @@ let package = Package(
           "SwiftShell"
         ]
       ),
-      .testTarget(name: "CoreTests", dependencies: ["Core"]),
+      .testTarget(name: "CoreTests", dependencies: ["Core", "TestsFoundation"]),
       .target(
         name: "Version",
         dependencies: [
@@ -27,7 +27,7 @@ let package = Package(
           .target(name: "Core"),
         ]
       ),
-      .testTarget(name: "VersionTests", dependencies: ["Version"]),
+      .testTarget(name: "VersionTests", dependencies: ["Version", "TestsFoundation"]),
       .target(
         name: "Frameworks",
         dependencies: [
@@ -43,7 +43,7 @@ let package = Package(
         ]
       ),
       .testTarget(name: "BuildSettingsTests", dependencies: ["BuildSettings"]),
-      .testTarget(name: "FrameworksTests", dependencies: ["Frameworks", "PathKit"]),
+      .testTarget(name: "FrameworksTests", dependencies: ["Frameworks", "PathKit", "TestsFoundation"]),
       .target(
         name: "xcode",
         dependencies: [
@@ -54,6 +54,7 @@ let package = Package(
           .target(name: "BuildSettings")
         ]
       ),
+      .testTarget(name: "TestsFoundation")
     ],
     swiftLanguageVersions: [3]
 )
