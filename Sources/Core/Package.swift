@@ -202,7 +202,7 @@ public struct Package {
     func stripDirectory(name: String, from frameworkPath: Path) throws {
         let path = frameworkPath + Path(name)
         if path.exists {
-            try FileManager.default.removeItem(atPath: path.string)
+            try path.delete()
         }
     }
 
