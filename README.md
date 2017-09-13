@@ -43,6 +43,12 @@ It embeds your frameworks, their symbols, and the bcsymbolmap files into your bu
 
 ![Xcode build phase using the command to embed the frameworks](Assets/Frameworks-Embed.png)
 
+##### Strip
+It strips architectures from your frameworks:
+
+```
+xcode frameworks strip MyFramework.framework --archs armv7
+```
 
 ## References
 
