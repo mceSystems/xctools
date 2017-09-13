@@ -32,6 +32,18 @@ brew install xcode
 1. Git clone the repository `git clone git@github.com:swift-xcode/xcode.git`
 2. Build with `swift build`
 
+## Usage
+
+You can check the available commands by just running `xcode` from the console.
+
+#### Frameworks
+
+##### Embed
+It embeds your frameworks, their symbols, and the bcsymbolmap files into your built product stripping all the unnecessary architectures. This command should be used from a Xcode build phase as shown in the screenshot below:
+
+![Xcode build phase using the command to embed the frameworks](Assets/Frameworks-Embed.png)
+
+
 ## References
 
 - [Speeding Up Custom Script Phases](http://indiestack.com/2014/12/speeding-up-custom-script-phases/)

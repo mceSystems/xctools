@@ -35,13 +35,13 @@ final class BuildSettingsCleanCommandTests: XCTestCase {
         pbxproj.buildConfigurations.append(configNativeTarget)
         pbxproj.buildConfigurations.append(configAggregateTarget)
         pbxproj.configurationLists.append(XCConfigurationList(reference: "listProject",
-                                                              buildConfigurations: Set<String>(arrayLiteral: "configProject"),
+                                                              buildConfigurations: ["configProject"],
                                                               defaultConfigurationName: "default"))
         pbxproj.configurationLists.append(XCConfigurationList(reference: "listNativeTarget",
-                                                              buildConfigurations: Set<String>(arrayLiteral: "configNativeTarget"),
+                                                              buildConfigurations: ["configNativeTarget"],
                                                               defaultConfigurationName: "default"))
         pbxproj.configurationLists.append(XCConfigurationList(reference: "listAggregateTarget",
-                                                              buildConfigurations: Set<String>(arrayLiteral: "configAggregateTarget"),
+                                                              buildConfigurations: ["configAggregateTarget"],
                                                               defaultConfigurationName: "default"))
         pbxproj.projects.append(PBXProject(reference: "ref",
                                            buildConfigurationList: "listProject",
