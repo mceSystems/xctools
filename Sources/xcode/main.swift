@@ -30,14 +30,17 @@ Group {
             try StripCommand(packagePath: Path(path), architecturesToStrip: Set(archs.components(separatedBy: ","))).execute()
         }
         let buildUniversal = command(Option("scheme", "", flag: "s", description: "The scheme tha builds the framework"),
+                                     Option("config", "Debug", flag: "c", description: "The configuration to build"),
                                      Option("project", "", flag: "p", description: "The path to the project that contains the framework that will be build"),
-                                     Option("workspace", "", flag: "w", description: "The path to the workspace that contains the framework that will be build")) { (scheme: String, project: String, workspace: String) in
+                                     Option("workspace", "", flag: "w", description: "The path to the workspace that contains the framework that will be build")) { (scheme: String, project: String, workspace: String, config: String) in
                                         try BuildUniversal(workspace: (workspace.isEmpty) ? nil : Path(workspace),
                                                            project: (project.isEmpty) ? nil : Path(project),
-                                                           scheme: scheme).execute()
+                                                           scheme: scheme,
+                                                           config: config).execute()
         }
         frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
         frameworks.addCommand("strip", "strip architectures from a given framework", stripCommand)
+        frameworks.addCommand("build-universal", "build the given framework for device and simulator, merging them using lipo", stripCommand)
     }
     }.run()
 // swiftlint:enable line_length

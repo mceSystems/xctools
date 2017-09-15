@@ -11,4 +11,12 @@ public struct System {
         return run(which(command: "xcrun", defaultPath: "/usr/bin/xcrun"), args)
     }
     
+    /// Executes xcodebuild.
+    ///
+    /// - Parameter args: arguments to be passed to xcodebuild.
+    /// - Returns: execution output.
+    public static func xcodebuild(_ args: Any ...) -> RunOutput {
+        return run(which(command: "xcodebuild", defaultPath: "/usr/bin/xcodebuild"), args)
+    }
+    
 }

@@ -26,7 +26,7 @@ public class StripCommand {
         self.architecturesToStrip = architecturesToStrip
     }
     
-    // MARK: - Func
+    // MARK: - Public
     
     /// Executes the command.
     ///
