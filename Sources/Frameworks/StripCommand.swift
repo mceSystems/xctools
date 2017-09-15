@@ -33,8 +33,8 @@ public class StripCommand {
     /// - Throws: an error if the architectures cannot be stripped.
     public func execute() throws {
         let package = Package(path: packagePath)
-        let architecturesToKeep = Set(package.architectures()).subtracting(architecturesToStrip)
-        try package.strip(keepingArchitectures: Array(architecturesToKeep))
+        let keepingArchitectures = Set(package.architectures()).subtracting(architecturesToStrip)
+        try package.strip(keepingArchitectures: Array(keepingArchitectures))
     }
     
 }
