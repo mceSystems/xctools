@@ -29,6 +29,13 @@ Group {
                                    Option("archs", "", flag: "a", description: "Comma separated list of architectures to strip (e.g. armv7,arm64)")) { (path: String, archs: String) in
             try StripCommand(packagePath: Path(path), architecturesToStrip: Set(archs.components(separatedBy: ","))).execute()
         }
+        let buildUniversal = command(Option("scheme", "", flag: "s", description: "The scheme tha builds the framework"),
+                                     Option("project", "", flag: "p", description: "The path to the project that contains the framework that will be build"),
+                                     Option("workspace", "", flag: "w", description: "The path to the workspace that contains the framework that will be build")) { (scheme: String, project: String, workspace: String) in
+                                        try BuildUniversal(workspace: (workspace.isEmpty) ? nil : Path(workspace),
+                                                           project: (project.isEmpty) ? nil : Path(project),
+                                                           scheme: scheme).execute()
+        }
         frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
         frameworks.addCommand("strip", "strip architectures from a given framework", stripCommand)
     }
