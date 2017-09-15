@@ -41,7 +41,6 @@ final class EmbedCommandTests: XCIntegrationTestCase {
                                validArchs: ["armv7"],
                                action: .install,
                                builtProductsDir: Path(outputPath()).parent().string)
-        try? Path(outputPath()).mkdir()
     }
     
     func test_execute_copiesTheFramework() {
@@ -84,11 +83,6 @@ final class EmbedCommandTests: XCIntegrationTestCase {
     func test_execute_copyTheBCSymbols_whenTheActionIsInstall() {
         try? subject.execute()
         XCTAssertEqual(Path(outputPath()).parent().glob("*.bcsymbolmap").count, 2)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        try? Path(outputPath()).delete()
     }
     
     private func inputPath() -> String {

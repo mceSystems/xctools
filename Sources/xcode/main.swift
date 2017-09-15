@@ -13,7 +13,7 @@ enum XcodeError: Error {
 Group {
     $0.group("frameworks", "set of tools to work with frameworks in your project") { (frameworks) in
         let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
-                                   Option("configs", "", flag: "c", description: "Array separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (buildAllConfigs: Bool, configs: String) in                                    
+                                   Option("configs", "", flag: "c", description: "Comma separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (buildAllConfigs: Bool, configs: String) in
                                     guard let environment = XcodeEnvironment() else{
                                         throw XcodeError.xcodeEnvironmentNotFound
                                     }
@@ -25,7 +25,12 @@ Group {
                                                      action: environment.action,
                                                      builtProductsDir: environment.builtProductsDir).execute()
         }
+        let stripCommand = command(Argument("path", description: "Framework path"),
+                                   Option("archs", "", flag: "a", description: "Comma separated list of architectures to strip (e.g. armv7,arm64)")) { (path: String, archs: String) in
+            try StripCommand(packagePath: Path(path), architecturesToStrip: Set(archs.components(separatedBy: ","))).execute()
+        }
         frameworks.addCommand("embed", "embeds frameworks into the product /Frameworks folder", embedCommand)
+        frameworks.addCommand("strip", "strip architectures from a given framework", stripCommand)
     }
     }.run()
 // swiftlint:enable line_length
