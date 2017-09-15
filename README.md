@@ -14,6 +14,9 @@
   <a href="https://github.com/swift-xcode/xcode/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
+  <a>
+    <img src="https://swift-xcode.herokuapp.com/badge.svg">
+  </a>
 </p>
 
 A set of command line tools to interact with your Xcode projects.
