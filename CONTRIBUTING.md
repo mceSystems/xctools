@@ -12,10 +12,6 @@ Following these guidelines helps to communicate that you respect the time of the
 
 xcode is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into xcode itself.
 
-### A bad contribution
-
-Please, don't use the issue tracker for support questions. For that purpose use Stack Overflow tagging your threads with `#xcode`.
-
 # Ground Rules
 
 * Ensure that changes in the project are tested.
