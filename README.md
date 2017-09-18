@@ -27,7 +27,7 @@ You can easily install xcode with Homebrew:
 
 ```
 brew tap swift-xcode/xcode git@github.com:swift-xcode/xcode.git
-brew install xcode 
+brew install xcode --no-sandbox
 ```
 
 ## Setup
