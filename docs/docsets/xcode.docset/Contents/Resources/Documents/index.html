@@ -50,6 +50,9 @@
   <a href="https://github.com/swift-xcode/xcode/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
+  <a>
+    <img src="https://swift-xcode.herokuapp.com/badge.svg">
+  </a>
 </p>
 
 <p>A set of command line tools to interact with your Xcode projects.</p>
@@ -65,6 +68,20 @@ brew install xcode
 <li>Git clone the repository <code>git clone git@github.com:swift-xcode/xcode.git</code></li>
 <li>Build with <code>swift build</code></li>
 </ol>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>You can check the available commands by just running <code>xcode</code> from the console.</p>
+<h4 id='frameworks' class='heading'>Frameworks</h4>
+<h5 id='embed' class='heading'>Embed</h5>
+
+<p>It embeds your frameworks, their symbols, and the bcsymbolmap files into your built product stripping all the unnecessary architectures. This command should be used from a Xcode build phase as shown in the screenshot below:</p>
+
+<p><img src="Assets/Frameworks-Embed.png" alt="Xcode build phase using the command to embed the frameworks"></p>
+<h5 id='strip' class='heading'>Strip</h5>
+
+<p>It strips architectures from your frameworks:</p>
+<pre class="highlight plaintext"><code>xcode frameworks strip MyFramework.framework --archs armv7
+</code></pre>
 <h2 id='references' class='heading'>References</h2>
 
 <ul>
