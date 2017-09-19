@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
   <a>
-    <img src="https://swift-xcode.herokuapp.com/badge.svg">
+    <a href="http://swift-xcode.herokuapp.com/"><img src="https://swift-xcode.herokuapp.com/badge.svg"></a>
   </a>
 </p>
 
