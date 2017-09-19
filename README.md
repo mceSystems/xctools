@@ -61,6 +61,10 @@ xcode frameworks strip MyFramework.framework --archs armv7
 - [Commander](https://github.com/kylef/Commander)
 - [PlistBuddy](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html)
 
+## Contributors :heart:
+
+[<img alt="pepibumur" src="https://avatars3.githubusercontent.com/u/663605?v=4&s=117" width="117">](https://github.com/pepibumur)
+
 ## License
 
 ```
