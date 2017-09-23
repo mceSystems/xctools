@@ -10,7 +10,7 @@ class Xcode < Formula
     def install
       xcode_path = "#{buildpath}/.build/release/xcode"
       ohai "Building xcode"
-      system("swift build -c release")
+      system("swift build --disable-sandbox -c release")
       bin.install xcode_path
     end
 
