@@ -33,7 +33,7 @@ brew install xcode
 You can also install the tool using [🌱 Mint](https://github.com/yonaskolb/mint) by just running:
 
 ```bash
-mint install swift-xcode/xcode
+mint install swift-xcode/xcode 0.1.0 xcode
 ```
 
 ## Setup
