@@ -57,11 +57,11 @@ task :ci => [:clean] do
   sh "swift test"
 end
 
-desc "Bumps the version of xcodeprojlint. It creates a new tagged commit and archives the binary to be published with the release"
+desc "Bumps the version of xcode. It creates a new tagged commit and archives the binary to be published with the release"
 task :release => [:clean] do
   abort '> Commit all your changes before starting the release' unless !any_git_changes?
   build
-  print "> xcodeproj built"
+  print "> xcode built"
   generate_docs
   print "> Documentation generated"
   version = next_version
