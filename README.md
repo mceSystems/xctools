@@ -30,6 +30,12 @@ brew tap swift-xcode/xcode git@github.com:swift-xcode/xcode.git
 brew install xcode
 ```
 
+You can also install the tool using [🌱 Mint](https://github.com/yonaskolb/mint) by just running:
+
+```bash
+mint install swift-xcode/xcode
+```
+
 ## Setup
 
 1. Git clone the repository `git clone git@github.com:swift-xcode/xcode.git`
