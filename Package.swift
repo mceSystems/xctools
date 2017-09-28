@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "xcode",
+    name: "xctools",
     dependencies: [
       .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.6.0")),
       .package(url: "https://github.com/kareman/SwiftShell.git", .upToNextMinor(from: "3.0.1")),
@@ -45,7 +45,7 @@ let package = Package(
       .testTarget(name: "BuildSettingsTests", dependencies: ["BuildSettings"]),
       .testTarget(name: "FrameworksTests", dependencies: ["Frameworks", "PathKit", "TestsFoundation"]),
       .target(
-        name: "xcode",
+        name: "xctools",
         dependencies: [
           "Commander",
           .target(name: "Core"),

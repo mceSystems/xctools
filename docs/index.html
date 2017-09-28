@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>xcode  Reference</title>
+    <title>xctools  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,18 +10,18 @@
     
   </head>
   <body>
-    <a title="xcode  Reference"></a>
+    <a title="xctools  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">xcode Docs</a> (0% documented)</p>
-        <p class="header-right"><a href="https://github.com/swift-xcode/xcode"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p><a href="index.html">xctools Docs</a> (0% documented)</p>
+        <p class="header-right"><a href="https://github.com/swift-xcode/xctools"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
     <div class="content-wrapper">
       <p id="breadcrumbs">
-        <a href="index.html">xcode Reference</a>
+        <a href="index.html">xctools Reference</a>
         <img id="carat" src="img/carat.png" />
-        xcode  Reference
+        xctools  Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -34,43 +34,47 @@
           <section class="section">
             
             <p align="center">
-<a href="https://github.com/swift-xcode/xcode">
-<img src="Assets/Logo.png" alt="XcodeGen" width="350" />
+<a href="https://github.com/swift-xcode/xctools">
+<img src="Assets/Logo.png" alt="xctools" width="350" />
 </a>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/swift-xcode/xcode/releases">
+  <a href="https://github.com/swift-xcode/xctools/releases">
     <img src="https://img.shields.io/github/release/swift-xcode/xcode.svg"/>
   </a>
-  <a href="https://travis-ci.org/swift-xcode/xcode">
-    <img src="https://img.shields.io/travis/swift-xcode/xcode/master.svg?style=flat"/>
+  <a href="https://travis-ci.org/swift-xcode/xctools">
+    <img src="https://img.shields.io/travis/swift-xcode/xctools/master.svg?style=flat"/>
   </a>
-  <a href="https://github.com/swift-xcode/xcode/blob/master/LICENSE">
+  <a href="https://github.com/swift-xcode/xctools/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
   <a>
-    <img src="https://swift-xcode.herokuapp.com/badge.svg">
+    <a href="http://swift-xcode.herokuapp.com/"><img src="https://swift-xcode.herokuapp.com/badge.svg"></a>
   </a>
 </p>
 
 <p>A set of command line tools to interact with your Xcode projects.</p>
 <h2 id='install' class='heading'>Install</h2>
 
-<p>You can easily install xcode with Homebrew:</p>
-<pre class="highlight plaintext"><code>brew tap swift-xcode/xcode git@github.com:swift-xcode/xcode.git
-brew install xcode 
+<p>You can easily install xctools with Homebrew:</p>
+<pre class="highlight plaintext"><code>brew tap swift-xcode/xctools git@github.com:swift-xcode/xctools.git
+brew install xctools
+</code></pre>
+
+<p>You can also easily run the tool using <a href="https://github.com/yonaskolb/mint">🌱 Mint</a>:</p>
+<pre class="highlight shell"><code>mint run swift-xcode/xctools
 </code></pre>
 <h2 id='setup' class='heading'>Setup</h2>
 
 <ol>
-<li>Git clone the repository <code>git clone git@github.com:swift-xcode/xcode.git</code></li>
+<li>Git clone the repository <code>git clone git@github.com:swift-xcode/xctools.git</code></li>
 <li>Build with <code>swift build</code></li>
 </ol>
 <h2 id='usage' class='heading'>Usage</h2>
 
-<p>You can check the available commands by just running <code>xcode</code> from the console.</p>
+<p>You can check the available commands by just running <code>xctools</code> from the console.</p>
 <h4 id='frameworks' class='heading'>Frameworks</h4>
 <h5 id='embed' class='heading'>Embed</h5>
 
@@ -80,7 +84,7 @@ brew install xcode
 <h5 id='strip' class='heading'>Strip</h5>
 
 <p>It strips architectures from your frameworks:</p>
-<pre class="highlight plaintext"><code>xcode frameworks strip MyFramework.framework --archs armv7
+<pre class="highlight plaintext"><code>xctools frameworks strip MyFramework.framework --archs armv7
 </code></pre>
 <h2 id='references' class='heading'>References</h2>
 
@@ -91,6 +95,9 @@ brew install xcode
 <li><a href="https://github.com/kylef/Commander">Commander</a></li>
 <li><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html">PlistBuddy</a></li>
 </ul>
+<h2 id='contributors-heart' class='heading'>Contributors :heart:</h2>
+
+<p><a href="https://github.com/pepibumur"><img alt="pepibumur" src="https://avatars3.githubusercontent.com/u/663605?v=4&s=117" width="117"></a></p>
 <h2 id='license' class='heading'>License</h2>
 <pre class="highlight plaintext"><code>MIT License
 

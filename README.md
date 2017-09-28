@@ -1,17 +1,17 @@
 <p align="center">
-<a href="https://github.com/swift-xcode/xcode">
-<img src="Assets/Logo.png" alt="XcodeGen" width="350" />
+<a href="https://github.com/swift-xcode/xctools">
+<img src="Assets/Logo.png" alt="xctools" width="350" />
 </a>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/swift-xcode/xcode/releases">
+  <a href="https://github.com/swift-xcode/xctools/releases">
     <img src="https://img.shields.io/github/release/swift-xcode/xcode.svg"/>
   </a>
-  <a href="https://travis-ci.org/swift-xcode/xcode">
-    <img src="https://img.shields.io/travis/swift-xcode/xcode/master.svg?style=flat"/>
+  <a href="https://travis-ci.org/swift-xcode/xctools">
+    <img src="https://img.shields.io/travis/swift-xcode/xctools/master.svg?style=flat"/>
   </a>
-  <a href="https://github.com/swift-xcode/xcode/blob/master/LICENSE">
+  <a href="https://github.com/swift-xcode/xctools/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
   <a>
@@ -23,27 +23,27 @@ A set of command line tools to interact with your Xcode projects.
 
 ## Install
 
-You can easily install xcode with Homebrew:
+You can easily install xctools with Homebrew:
 
 ```
-brew tap swift-xcode/xcode git@github.com:swift-xcode/xcode.git
-brew install xcode
+brew tap swift-xcode/xctools git@github.com:swift-xcode/xctools.git
+brew install xctools
 ```
 
 You can also easily run the tool using [🌱 Mint](https://github.com/yonaskolb/mint):
 
 ```bash
-mint run swift-xcode/xcode 0.1.0 xcode
+mint run swift-xcode/xctools
 ```
 
 ## Setup
 
-1. Git clone the repository `git clone git@github.com:swift-xcode/xcode.git`
+1. Git clone the repository `git clone git@github.com:swift-xcode/xctools.git`
 2. Build with `swift build`
 
 ## Usage
 
-You can check the available commands by just running `xcode` from the console.
+You can check the available commands by just running `xctools` from the console.
 
 #### Frameworks
 
@@ -56,7 +56,7 @@ It embeds your frameworks, their symbols, and the bcsymbolmap files into your bu
 It strips architectures from your frameworks:
 
 ```
-xcode frameworks strip MyFramework.framework --archs armv7
+xctools frameworks strip MyFramework.framework --archs armv7
 ```
 
 ## References

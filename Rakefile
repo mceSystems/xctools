@@ -8,7 +8,7 @@ require 'colorize'
 def generate_docs
   print "> Executing tests"
   sh "swift package generate-xcodeproj"
-  sh "jazzy --clean --sdk macosx --xcodebuild-arguments -scheme,xcode --skip-undocumented --no-download-badge"
+  sh "jazzy --clean --sdk macosx --xcodebuild-arguments -scheme,xctools --skip-undocumented --no-download-badge"
 end
 
 def any_git_changes?
@@ -57,11 +57,11 @@ task :ci => [:clean] do
   sh "swift test"
 end
 
-desc "Bumps the version of xcode. It creates a new tagged commit and archives the binary to be published with the release"
+desc "Bumps the version of xctools. It creates a new tagged commit and archives the binary to be published with the release"
 task :release => [:clean] do
   abort '> Commit all your changes before starting the release' unless !any_git_changes?
   build
-  print "> xcode built"
+  print "> xctools built"
   generate_docs
   print "> Documentation generated"
   version = next_version

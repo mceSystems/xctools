@@ -2,7 +2,7 @@
 
 ### Welcome dear contributor!
 
-First off, thank you for considering contributing to xcode. It's people like you that make xcode such a great tool.
+First off, thank you for considering contributing to xctools. It's people like you that make xctools such a great tool.
 
 ### Why reading the guidelines is important
 
@@ -10,7 +10,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ### A good contribution
 
-xcode is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into xcode itself.
+xctools is an open source project and we love to receive contributions from our community — you! There are many ways to contribute, from writing tutorials or blog posts, improving the documentation, submitting bug reports and feature requests or writing code which can be incorporated into xctools itself.
 
 # Ground Rules
 
@@ -20,11 +20,11 @@ xcode is an open source project and we love to receive contributions from our co
 * Don't add any classes to the codebase unless absolutely needed.
 * Keep feature versions as small as possible, preferably one new feature per version.
 * Be welcoming to newcomers and encourage diverse new contributors from all backgrounds.
-* Comply the [code of conduct](https://github.com/swift-xcode/xcode/blob/master/CODE_OF_CONDUCT.md) when you participate in the project.
+* Comply the [code of conduct](https://github.com/swift-xcode/xctools/blob/master/CODE_OF_CONDUCT.md) when you participate in the project.
 
 # Your First Contribution
 
-Unsure where to begin contributing to xcode? You can start by looking through these easy and thread issues:
+Unsure where to begin contributing to xctools? You can start by looking through these easy and thread issues:
 
 - **difficulty:easy** - issues which should only require a few lines of code, and a test or two.
 - **type:thread** - issues which should be a bit more involved than beginner issues.
@@ -73,7 +73,7 @@ When filing an issue, make sure to answer these five questions:
 
 Before suggesting a new feature, make sure that it aligns with the project philosophy, providing command line tools to automate Xcode-related tasks.
 
-If you find yourself wishing for a feature that doesn't exist in xcode, you are probably not alone. There are bound to be others out there with similar needs. Many of the features that xcode has today have been added because our users saw the need. Open an issue on our issues list on GitHub which describes the feature you would like to see, why you need it, and how it should work.
+If you find yourself wishing for a feature that doesn't exist in xctools, you are probably not alone. There are bound to be others out there with similar needs. Many of the features that xctools has today have been added because our users saw the need. Open an issue on our issues list on GitHub which describes the feature you would like to see, why you need it, and how it should work.
 
 # Code review process
 
