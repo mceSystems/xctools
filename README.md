@@ -1,21 +1,21 @@
 <p align="center">
-<a href="https://github.com/swift-xcode/xctools">
+<a href="https://github.com/xcodeswift/xctools">
 <img src="Assets/Logo.png" alt="xctools" width="350" />
 </a>
 </p>
 <p align="center">
   <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/swift-xcode/xctools/releases">
-    <img src="https://img.shields.io/github/release/swift-xcode/xcode.svg"/>
+  <a href="https://github.com/xcodeswift/xctools/releases">
+    <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
   </a>
-  <a href="https://travis-ci.org/swift-xcode/xctools">
-    <img src="https://img.shields.io/travis/swift-xcode/xctools/master.svg?style=flat"/>
+  <a href="https://travis-ci.org/xcodeswift/xctools">
+    <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
   </a>
-  <a href="https://github.com/swift-xcode/xctools/blob/master/LICENSE">
+  <a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
   </a>
   <a>
-    <a href="http://swift-xcode.herokuapp.com/"><img src="https://swift-xcode.herokuapp.com/badge.svg"></a>
+    <a href="http://xcodeswift.herokuapp.com/"><img src="https://xcodeswift.herokuapp.com/badge.svg"></a>
   </a>
 </p>
 
@@ -26,19 +26,19 @@ A set of command line tools to interact with your Xcode projects.
 You can easily install xctools with Homebrew:
 
 ```
-brew tap swift-xcode/xctools git@github.com:swift-xcode/xctools.git
+brew tap xcodeswift/xctools git@github.com:xcodeswift/xctools.git
 brew install xctools
 ```
 
 You can also easily run the tool using [🌱 Mint](https://github.com/yonaskolb/mint):
 
 ```bash
-mint run swift-xcode/xctools
+mint run xcodeswift/xctools
 ```
 
 ## Setup
 
-1. Git clone the repository `git clone git@github.com:swift-xcode/xctools.git`
+1. Git clone the repository `git clone git@github.com:xcodeswift/xctools.git`
 2. Build with `swift build`
 
 ## Usage
@@ -76,7 +76,7 @@ xctools frameworks strip MyFramework.framework --archs armv7
 ```
 MIT License
 
-Copyright (c) 2017 swift-xcode
+Copyright (c) 2017 xcode.swift
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

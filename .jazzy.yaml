@@ -1,7 +1,7 @@
-author: swift-xcode
+author: xcode.swift
 module: xctools
 module_version: 0.0.1
-github_url: https://github.com/swift-xcode/xctools
-copyright: 'Copyright © 2017 swift-xcode. All rights reserved.'
+github_url: https://github.com/xcodeswift/xctools
+copyright: 'Copyright © 2017 xcode.swift. All rights reserved.'
 readme: README.md
 documentation: guides/*.md
