@@ -1,4 +1,4 @@
-Resolves https://github.com/xcodeswift/xclint/issues/YYY
+Resolves https://github.com/xcodeswift/xctools/issues/YYY
 
 ### Short description 📝
 > Describe here the purpose of your PR.
