@@ -1,10 +1,5 @@
-<p align="center">
-<a href="https://github.com/xcodeswift/xctools">
-<img src="Assets/Logo.png" alt="xctools" width="350" />
-</a>
-</p>
-<p align="center">
-  <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
+# xctools
+<img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
   <a href="https://github.com/xcodeswift/xctools/releases">
     <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
   </a>
@@ -17,7 +12,6 @@
   <a>
     <a href="http://xcodeswift.herokuapp.com/"><img src="https://xcodeswift.herokuapp.com/badge.svg"></a>
   </a>
-</p>
 
 A set of command line tools to interact with your Xcode projects.
 
