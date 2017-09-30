@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>xctools  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="xctools  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">xctools Docs</a> (0% documented)</p>
+        <p class="header-right"><a href="https://github.com/xcodeswift/xctools"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">xctools Reference</a>
+        <img id="carat" src="img/carat.png" />
+        xctools  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <p align="center">
+<a href="https://github.com/xcodeswift/xctools">
+<img src="Assets/Logo.png" alt="xctools" width="350" />
+</a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
+  <a href="https://github.com/xcodeswift/xctools/releases">
+    <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
+  </a>
+  <a href="https://travis-ci.org/xcodeswift/xctools">
+    <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
+  </a>
+  <a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
+  </a>
+  <a>
+    <a href="http://xcodeswift.herokuapp.com/"><img src="https://xcodeswift.herokuapp.com/badge.svg"></a>
+  </a>
+</p>
+
+<p>A set of command line tools to interact with your Xcode projects.</p>
+<h2 id='install' class='heading'>Install</h2>
+
+<p>You can easily install xctools with Homebrew:</p>
+<pre class="highlight plaintext"><code>brew tap xcodeswift/xctools git@github.com:xcodeswift/xctools.git
+brew install xctools
+</code></pre>
+
+<p>You can also easily run the tool using <a href="https://github.com/yonaskolb/mint">🌱 Mint</a>:</p>
+<pre class="highlight shell"><code>mint run xcodeswift/xctools
+</code></pre>
+<h2 id='setup' class='heading'>Setup</h2>
+
+<ol>
+<li>Git clone the repository <code>git clone git@github.com:xcodeswift/xctools.git</code></li>
+<li>Build with <code>swift build</code></li>
+</ol>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>You can check the available commands by just running <code>xctools</code> from the console.</p>
+<h4 id='frameworks' class='heading'>Frameworks</h4>
+<h5 id='embed' class='heading'>Embed</h5>
+
+<p>It embeds your frameworks, their symbols, and the bcsymbolmap files into your built product stripping all the unnecessary architectures. This command should be used from a Xcode build phase as shown in the screenshot below:</p>
+
+<p><img src="Assets/Frameworks-Embed.png" alt="Xcode build phase using the command to embed the frameworks"></p>
+<h5 id='strip' class='heading'>Strip</h5>
+
+<p>It strips architectures from your frameworks:</p>
+<pre class="highlight plaintext"><code>xctools frameworks strip MyFramework.framework --archs armv7
+</code></pre>
+<h2 id='references' class='heading'>References</h2>
+
+<ul>
+<li><a href="http://indiestack.com/2014/12/speeding-up-custom-script-phases/">Speeding Up Custom Script Phases</a></li>
+<li><a href="https://github.com/Carthage/Carthage/blob/master/Source/carthage/CopyFrameworks.swift">Carthage copy frameworks</a></li>
+<li><a href="https://github.com/CocoaPods/CocoaPods/blob/master/lib/cocoapods/generator/embed_frameworks_script.rb">CocoaPods embed frameworks script</a></li>
+<li><a href="https://github.com/kylef/Commander">Commander</a></li>
+<li><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html">PlistBuddy</a></li>
+</ul>
+<h2 id='contributors-heart' class='heading'>Contributors :heart:</h2>
+
+<p><a href="https://github.com/pepibumur"><img alt="pepibumur" src="https://avatars3.githubusercontent.com/u/663605?v=4&s=117" width="117"></a></p>
+<h2 id='license' class='heading'>License</h2>
+<pre class="highlight plaintext"><code>MIT License
+
+Copyright (c) 2017 xcode.swift
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</code></pre>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright © 2017 xcode.swift. All rights reserved.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
