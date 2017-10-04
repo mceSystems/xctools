@@ -92,6 +92,18 @@ task :release => [:clean] do
   print "> Commit created and tagged with version: #{version}"
 end
 
+desc "Updates the Homebrew Formula to the values of the latest release. Creates a commit and pushes to the repository"
+task :update_formula do
+  version = current_version
+  update_formula(version)
+  print "> Updated formula to version: #{version}"
+  `rm xctools.tar.gz`
+  `git add Formula/xcode.rb`
+  `git commit -m "Update Formula to #{version}" release`
+  `git push origin`
+  print "> Commit created and pushed to repository"
+end
+
 task :docs do
   generate_docs
 end
