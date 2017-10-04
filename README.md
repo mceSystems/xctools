@@ -1,20 +1,20 @@
-<img src="assets/header.png" width="400"/><br/>
+<img src="Assets/header.png" width="400"/><br/>
 
 <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/xcodeswift/xctools/releases">
-    <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
-  </a>
-  <a href="https://travis-ci.org/xcodeswift/xctools">
-    <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
-  </a>
-  <a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
-  </a>
-  <a>
-    <a href="http://xcodeswift.herokuapp.com/"><img src="https://xcodeswift.herokuapp.com/badge.svg"></a>
-  </a>
-  <a href="https://twitter.com/xcodedotswift">
-    <img src="https://img.shields.io/badge/contact-@xcodedotswift-blue.svg?style=flat" alt="Twitter: @xcodedotswift" />
+<a href="https://github.com/xcodeswift/xctools/releases">
+  <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
+</a>
+<a href="https://travis-ci.org/xcodeswift/xctools">
+  <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
+</a>
+<a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
+</a>
+<a href="http://xcodeswift.herokuapp.com/">
+  <img src="https://xcodeswift.herokuapp.com/badge.svg">
+</a>
+<a href="https://twitter.com/xcodedotswift">
+  <img src="https://img.shields.io/badge/contact-@xcodedotswift-blue.svg?style=flat" alt="Twitter: @xcodedotswift" />
 </a>
 
 A set of command line tools to interact with your Xcode projects.
