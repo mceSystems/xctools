@@ -1,4 +1,6 @@
-# xctools
+<img src="assets/header.png" width="400"/><br/>
+
+<img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
   <a href="https://github.com/xcodeswift/xctools/releases">
     <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
   </a>
