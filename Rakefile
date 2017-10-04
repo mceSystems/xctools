@@ -39,6 +39,29 @@ def print(message)
   puts message.colorize(:yellow)
 end
 
+def get_archive_url(version)
+  'https://github.com/xcodeswift/xctools/archive/' + "#{version}" + '.tar.gz'
+end
+
+def download_archive(url)
+  # filedownload, follow link, output errors, no progress meter
+  `curl -OLSs #{url}`
+end
+
+def get_checksum(version)
+  `shasum -a 256 #{version}.tar.gz | awk '{printf $1}'`
+end
+
+def update_formula(version)
+  path = 'Formula/xcode.rb'
+  archive_url = get_archive_url(version)
+  download_archive(archive_url)
+  newSha = %Q{"#{get_checksum(version)}"}
+  newUrl = %Q{"#{archive_url}"}
+  `sed -i "" 's|url .*$|url #{newUrl}|' #{path}`
+  `sed -i "" 's|sha256 .*$|sha256 #{newSha}|' #{path}`
+end
+
 ### TASKS ###
 
 desc "Removes the build folder"
