@@ -1,6 +1,5 @@
 <img src="Assets/header.png" width="400"/><br/>
 
-<img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
 <a href="https://github.com/xcodeswift/xctools/releases">
   <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
 </a>
@@ -15,6 +14,9 @@
 </a>
 <a href="https://twitter.com/xcodedotswift">
   <img src="https://img.shields.io/badge/contact-@xcodedotswift-blue.svg?style=flat" alt="Twitter: @xcodedotswift" />
+</a>
+<a href="https://swift.org/package-manager">
+  <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager"/>
 </a>
 
 A set of command line tools to interact with your Xcode projects.
