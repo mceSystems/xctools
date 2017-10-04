@@ -44,19 +44,19 @@ def get_archive_url(version)
 end
 
 def download_archive(url)
-  # filedownload, follow link, output errors, no progress meter
-  `curl -OLSs #{url}`
+  # follow link, output errors, no progress meter
+  `curl -LSs #{url} -o xctools.tar.gz`
 end
 
-def get_checksum(version)
-  `shasum -a 256 #{version}.tar.gz | awk '{printf $1}'`
+def get_checksum
+  `shasum -a 256 xctools.tar.gz | awk '{printf $1}'`
 end
 
 def update_formula(version)
   path = 'Formula/xcode.rb'
   archive_url = get_archive_url(version)
   download_archive(archive_url)
-  newSha = %Q{"#{get_checksum(version)}"}
+  newSha = %Q{"#{get_checksum}"}
   newUrl = %Q{"#{archive_url}"}
   `sed -i "" 's|url .*$|url #{newUrl}|' #{path}`
   `sed -i "" 's|sha256 .*$|sha256 #{newSha}|' #{path}`
