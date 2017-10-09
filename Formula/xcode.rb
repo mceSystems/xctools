@@ -8,7 +8,7 @@ class Xcode < Formula
     depends_on :xcode => "9.0"
 
     def install
-      xcode_path = "#{buildpath}/.build/release/xcode"
+      xcode_path = "#{buildpath}/.build/release/xctools"
       ohai "Building xcode"
       system("swift build --disable-sandbox -c release")
       bin.install xcode_path
