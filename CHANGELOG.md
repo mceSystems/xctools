@@ -1,3 +1,5 @@
+🚀 Check out the guidelines [here](https://github.com/xcodeswift/contributors/blob/master/CHANGELOG_GUIDELINES.md)
+
 ## 0.2.0
 - Disable sandbox when building xctools for Homebrew https://github.com/xcodeswift/xctools/pull/14 by @pepibumur
 - Rename tool to `xctools`.
