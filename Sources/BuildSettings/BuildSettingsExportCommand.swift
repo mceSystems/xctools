@@ -26,7 +26,7 @@ public struct BuildSettingsExportCommand {
             } else if let intValue = value as? Int {
                 _stringValue =  "\(intValue)"
             } else if let stringValue = value as? String {
-                inherited = stringValue.contains("$(inherited)")
+                inherited = stringValue.contains("$(inherited)") || stringValue.isEmpty
                 _stringValue = stringValue.isEmpty ? "\"\"" : stringValue.replacingOccurrences(of: "$(inherited)",
                                                                                          with: "")
             } else if let stringsArrayValue = value as? [String] {
