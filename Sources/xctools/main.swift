@@ -29,10 +29,12 @@ Group {
         frameworks.addCommand("strip", "strip architectures from a given framework", stripCommand)
     }
     
+    
     $0.group("build-settings", "set of tools to work with your project build settings") { (buildSettings) in
         let exportCommand = command(Option("project", "", flag: "p", description: "Xcode project"),
                                     Option("target", "", flag: "t", description: "Target whose build settings will be extracted"),
-                                    Option("output", "", flag: "o", description: "Output path (e.g. /path/output.xcconfig)")) { (project: String, target: String, output: String) in
+                                    Option("output", "", flag: "o", description: "Output path (e.g. /path/output.xcconfig)"),
+                                    Flag("merge", flag: "m", description: "Merge the target settings with the project ones", default: false)) { (project: String, target: String, output: String, merge: Bool) in
                                         if project.isEmpty {
                                             return print("Project argument is required (e.g. -p MyProject.xcodeproj)")
                                         }
@@ -42,7 +44,8 @@ Group {
                                         do {
                                             try BuildSettingsExportCommand(projectPath: Path(project),
                                                                            target: target.isEmpty ? nil: target,
-                                                                           output: Path(output)).execute()
+                                                                           output: Path(output),
+                                                                           mergeSettings: merge).execute()
                                         } catch {
                                             return print(error)
                                         }

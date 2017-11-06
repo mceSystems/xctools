@@ -5,28 +5,70 @@ import Core
 
 public struct BuildSettingsExportCommand {
     
+    // MARK: - ConfigurationBuildSetting
+    
+    struct ConfigurationBuildSetting {
+        
+        let value: String
+        var inherited: Bool
+        
+        init(value: Any) {
+            let valueAndInherited = ConfigurationBuildSetting.stringValueAndInherited(from: value)
+            self.value = valueAndInherited.value
+            self.inherited = valueAndInherited.inherited
+        }
+        
+        static func stringValueAndInherited(from value: Any) -> (value: String, inherited: Bool) {
+            var _stringValue: String = ""
+            var inherited: Bool = false
+            if let boolValue = value as? Bool {
+                _stringValue = boolValue ? "YES": "NO"
+            } else if let intValue = value as? Int {
+                _stringValue =  "\(intValue)"
+            } else if let stringValue = value as? String {
+                inherited = stringValue.contains("$(inherited)")
+                _stringValue = stringValue.isEmpty ? "\"\"" : stringValue.replacingOccurrences(of: "$(inherited)",
+                                                                                         with: "")
+            } else if let stringsArrayValue = value as? [String] {
+                var mutableArray = stringsArrayValue
+                if let index = mutableArray.index(of: "$(inherited)") {
+                    inherited = stringsArrayValue.contains("$(inherited)")
+                    mutableArray.remove(at: index)
+                }
+                _stringValue = mutableArray.joined(separator: " ")
+            }
+            return (value: _stringValue, inherited: inherited)
+        }
+        
+    }
+    
     // MARK: - Attributes
     
     private let project: XcodeProj
     private let target: String?
     private let output: Path
+    private let mergeSettings: Bool
     
     // MARK: - Public
     
     public init(projectPath: Path,
                 target: String? = nil,
-                output: Path) throws {
+                output: Path,
+                mergeSettings: Bool = false) throws {
         self.init(project: try XcodeProj.init(path: projectPath),
                   target: target,
-                  output: output)
+                  output: output,
+                  mergeSettings: mergeSettings)
     }
     
     init(project: XcodeProj,
          target: String? = nil,
-         output: Path) {
+         output: Path,
+         mergeSettings: Bool = false) {
         self.project = project
         self.target = target
         self.output = output
+        self.mergeSettings = mergeSettings
     }
     
     // MARK: - Public
@@ -38,24 +80,38 @@ public struct BuildSettingsExportCommand {
     
     // MARK: - Fileprivate
     
-    fileprivate func buildSettings() throws -> [String: Any] {
-        var configurations: [XCBuildConfiguration] = []
+    fileprivate func buildSettings() throws -> [String: ConfigurationBuildSetting] {
+        var buildSettings: [String: ConfigurationBuildSetting] = [:]
+        var projectBuildSettings: [String: ConfigurationBuildSetting] = [:]
+        var targetBuildSettings: [String: ConfigurationBuildSetting] = [:]
+        projectConfigurationList().flatMap(self.configurations)?.forEach({ (configuration) in
+            self.buildSettings(from: configuration).forEach({projectBuildSettings[$0.key] = $0.value})
+        })
         if let target = target {
             guard let nativeTarget = project.pbxproj.nativeTargets.first(where: {$0.name == target}) else {
                 throw "The target \(target) cannot be found"
             }
-            configurations = self.targetConfigurationList(nativeTarget: nativeTarget).flatMap(self.configurations) ?? []
-        } else {
-            configurations = projectConfigurationList().flatMap(self.configurations) ?? []
+            self.targetConfigurationList(nativeTarget: nativeTarget).flatMap(self.configurations)?.forEach({ (configuration) in
+                self.buildSettings(from: configuration).forEach({targetBuildSettings[$0.key] = $0.value})
+            })
         }
-        var settings: [String: Any] = [:]
-        configurations.forEach { (configuration) in
-            let configurationName = configuration.name
-            configuration.buildSettings.forEach { (setting, value) in
-                settings["\(setting)[config=\(configurationName)]"] = value
+        if target == nil || mergeSettings {
+            projectBuildSettings.forEach({buildSettings[$0.key] = $0.value})
+        }
+        targetBuildSettings.forEach { (targetBuildSetting) in
+            if let existingSetting = buildSettings[targetBuildSetting.key], targetBuildSetting.value.inherited, mergeSettings {
+                buildSettings[targetBuildSetting.key] = ConfigurationBuildSetting(value: existingSetting.value + " " + targetBuildSetting.value.value)
+            } else {
+                buildSettings[targetBuildSetting.key] = targetBuildSetting.value
             }
         }
-        return settings
+        return buildSettings
+    }
+    
+    fileprivate func buildSettings(from configuration: XCBuildConfiguration) -> [String: ConfigurationBuildSetting] {
+        return configuration.buildSettings.reduce(into: [String: ConfigurationBuildSetting](), { (prev, next) in
+            prev["\(next.key)=[config=\(configuration.name)]"] = ConfigurationBuildSetting(value: next.value)
+        })
     }
     
     fileprivate func targetConfigurationList(nativeTarget: PBXNativeTarget) -> XCConfigurationList? {
@@ -81,22 +137,14 @@ public struct BuildSettingsExportCommand {
             })
     }
     
-    fileprivate func write(settings: [String: Any]) throws {
+    fileprivate func write(settings: [String: ConfigurationBuildSetting]) throws {
         try? output.parent().mkpath()
         try settings.reduce(into: "", { (prev, value) in
             let setting = value.key
             let settingValue = value.value
             prev += setting
             prev += " = "
-            if let boolValue = settingValue as? Bool {
-                prev += boolValue ? "YES": "NO"
-            } else if let intValue = settingValue as? Int {
-                prev +=  "\(intValue)"
-            } else if let stringValue = settingValue as? String {
-                prev += stringValue.isEmpty ? "\"\"" : stringValue
-            } else if let stringsArrayValue = settingValue as? [String] {
-                prev += stringsArrayValue.joined(separator: " ")
-            }
+            prev += settingValue.value
             prev += "\n"
         }).write(to: output.url, atomically: true, encoding: String.Encoding.utf8)
         
