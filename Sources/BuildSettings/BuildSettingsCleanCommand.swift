@@ -1,6 +1,6 @@
 import Foundation
 import PathKit
-import xcodeproj
+import xcproj
 
 public struct BuildSettingsCleanCommand {
     
@@ -42,10 +42,14 @@ public struct BuildSettingsCleanCommand {
             }
         }
         if let target = target {
-            project.pbxproj.nativeTargets.filter({$0.name == target}).forEach({ cleanConfigurationList(project.pbxproj, $0.buildConfigurationList )})
+            project.pbxproj.nativeTargets
+                .filter({$0.name == target})
+                .filter({$0.buildConfigurationList != nil})
+                .forEach({ cleanConfigurationList(project.pbxproj, $0.buildConfigurationList! )})
             project.pbxproj.aggregateTargets
                 .filter({$0.name == target})
-                .forEach({ cleanConfigurationList(project.pbxproj, $0.buildConfigurationList )})
+                .filter({$0.buildConfigurationList != nil})
+                .forEach({ cleanConfigurationList(project.pbxproj, $0.buildConfigurationList! )})
         } else {
             project.pbxproj.projects.forEach { cleanConfigurationList(project.pbxproj, $0.buildConfigurationList) }
         }
