@@ -154,14 +154,20 @@ public struct BuildSettingsExportCommand {
     }
     
     fileprivate func write(settings: [String: ConfigurationBuildSetting]) throws {
-        let content = settings.reduce(into: "", { (prev, value) in
+        let content = settings
+            .sorted(by: { $0.0.key < $0.1.key})
+            .reduce(into: "", { (prev, value) in
             let setting = value.key
             let settingValue = value.value
+            let inherited = value.value.inherited
             prev += setting
             prev += " = "
             prev += settingValue.value
+            if inherited {
+               prev += " $(inherited)"
+            }
             prev += "\n"
-        })
+            })
         try write(output, content)
     }
 }
