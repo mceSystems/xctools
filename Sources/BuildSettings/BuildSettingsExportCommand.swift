@@ -56,27 +56,35 @@ public struct BuildSettingsExportCommand {
     private let target: String?
     private let output: Path
     private let mergeSettings: Bool
+    private let write: (Path, String) throws -> ()
     
-    // MARK: - Public
+    // MARK: - Init
     
     public init(projectPath: Path,
                 target: String? = nil,
                 output: Path,
                 mergeSettings: Bool = false) throws {
+        let write: (Path, String) throws -> () = { (path, content) in
+            try? path.parent().mkpath()
+            try content.write(to: output.url, atomically: true, encoding: String.Encoding.utf8)
+        }
         self.init(project: try XcodeProj.init(path: projectPath),
                   target: target,
                   output: output,
-                  mergeSettings: mergeSettings)
+                  mergeSettings: mergeSettings,
+                  write: write)
     }
     
     init(project: XcodeProj,
          target: String? = nil,
          output: Path,
-         mergeSettings: Bool = false) {
+         mergeSettings: Bool = false,
+         write: @escaping (Path, String) throws -> ()) {
         self.project = project
         self.target = target
         self.output = output
         self.mergeSettings = mergeSettings
+        self.write = write
     }
     
     // MARK: - Public
@@ -146,15 +154,14 @@ public struct BuildSettingsExportCommand {
     }
     
     fileprivate func write(settings: [String: ConfigurationBuildSetting]) throws {
-        try? output.parent().mkpath()
-        try settings.reduce(into: "", { (prev, value) in
+        let content = settings.reduce(into: "", { (prev, value) in
             let setting = value.key
             let settingValue = value.value
             prev += setting
             prev += " = "
             prev += settingValue.value
             prev += "\n"
-        }).write(to: output.url, atomically: true, encoding: String.Encoding.utf8)
-        
+        })
+        try write(output, content)
     }
 }
