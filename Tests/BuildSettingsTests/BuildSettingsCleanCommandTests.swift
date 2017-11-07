@@ -1,6 +1,6 @@
 import Foundation
 import XCTest
-import xcodeproj
+import xcproj
 import BuildSettings
 import PathKit
 
@@ -15,9 +15,9 @@ final class BuildSettingsCleanCommandTests: XCTestCase {
         super.setUp()
         let workspaceData = XCWorkspace.Data(references: [])
         let workspace = XCWorkspace(data: workspaceData)
-        let pbxproj = PBXProj(archiveVersion: 0,
-                              objectVersion: 1,
-                              rootObject: "root")
+        let pbxproj = PBXProj(objectVersion: 1,
+                              rootObject: "root",
+                              archiveVersion: 0)
         project = XcodeProj(workspace: workspace, pbxproj: pbxproj)
         configProject = XCBuildConfiguration(reference: "configProject",
                                              name: "config",
@@ -43,22 +43,24 @@ final class BuildSettingsCleanCommandTests: XCTestCase {
         pbxproj.configurationLists.append(XCConfigurationList(reference: "listAggregateTarget",
                                                               buildConfigurations: ["configAggregateTarget"],
                                                               defaultConfigurationName: "default"))
-        pbxproj.projects.append(PBXProject(reference: "ref",
+        
+        pbxproj.projects.append(PBXProject(name: "proj1",
+                                           reference: "ref",
                                            buildConfigurationList: "listProject",
                                            compatibilityVersion: "3",
                                            mainGroup: "main"))
         pbxproj.nativeTargets.append(PBXNativeTarget(reference: "ref2",
+                                                     name: "shakira",
                                                      buildConfigurationList: "listNativeTarget",
                                                      buildPhases: [],
                                                      buildRules: [],
-                                                     dependencies: [],
-                                                     name: "shakira"))
+                                                     dependencies: []))
         pbxproj.aggregateTargets.append(PBXAggregateTarget(reference: "ref3",
+                                                           name: "shakira",
                                                            buildConfigurationList: "listAggregateTarget",
                                                            buildPhases: [],
                                                            buildRules: [],
-                                                           dependencies: [],
-                                                           name: "shakira"))
+                                                           dependencies: []))
     }
     
     
