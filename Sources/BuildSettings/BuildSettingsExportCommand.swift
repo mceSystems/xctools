@@ -19,24 +19,33 @@ public struct BuildSettingsExportCommand {
         }
         
         static func stringValueAndInherited(from value: Any) -> (value: String, inherited: Bool) {
-            var _stringValue: String = ""
-            var inherited: Bool = false
-            if let boolValue = value as? Bool {
-                _stringValue = boolValue ? "YES": "NO"
-            } else if let intValue = value as? Int {
-                _stringValue =  "\(intValue)"
-            } else if let stringValue = value as? String {
-                inherited = stringValue.contains("$(inherited)") || stringValue.isEmpty
-                _stringValue = stringValue.condensedWhitespace.isEmpty ? "\"\"" : stringValue.replacingOccurrences(of: "$(inherited)", with: "").condensedWhitespace
-            } else if let stringsArrayValue = value as? [String] {
+            var outputValue: String = ""
+            var outputInherited: Bool = false
+            switch value {
+            case let boolValue as Bool:
+                outputValue = boolValue ? "YES": "NO"
+            case let intValue as Int:
+                outputValue =  "\(intValue)"
+            case let stringValue as String:
+                outputInherited = stringValue.contains("$(inherited)") || stringValue.isEmpty
+                if stringValue.condensedWhitespace.isEmpty {
+                    outputValue = "\"\""
+                } else {
+                    outputValue = stringValue
+                        .replacingOccurrences(of: "$(inherited)", with: "")
+                        .condensedWhitespace
+                }
+            case let stringsArrayValue as [String]:
                 var mutableArray = stringsArrayValue
                 if let index = mutableArray.index(of: "$(inherited)") {
-                    inherited = stringsArrayValue.contains("$(inherited)")
+                    outputInherited = stringsArrayValue.contains("$(inherited)")
                     mutableArray.remove(at: index)
                 }
-                _stringValue = mutableArray.joined(separator: " ")
+                outputValue = mutableArray.joined(separator: " ")
+            default:
+                break
             }
-            return (value: _stringValue, inherited: inherited)
+            return (value: outputValue, inherited: outputInherited)
         }
         
     }
