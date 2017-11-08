@@ -1,8 +1,8 @@
 class Xctools < Formula
   desc "Handy command line tool for Xcode"
   homepage "https://github.com/xcodeswift/xctools"
-  url "https://github.com/xcodeswift/xctools/archive/0.2.0.tar.gz"
-  sha256 "c9528c346511380d68c29391af44fbc5be1ffa2d5bfd8d7fd160face357cba5b"
+  url "https://github.com/xcodeswift/xctools/archive/0.3.0.tar.gz"
+  sha256 "3cfd3bc0c1161fd4c72b71bd0f707f8f4ab9e77acdc890983a3dc289a572630e"
   head "https://github.com/xcodeswift/xctools.git"
 
   depends_on :xcode => "9.0"

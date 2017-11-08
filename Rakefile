@@ -53,7 +53,7 @@ def get_checksum
 end
 
 def update_formula(version)
-  path = 'Formula/xcode.rb'
+  path = 'Formula/xctools.rb'
   archive_url = get_archive_url(version)
   download_archive(archive_url)
   newSha = %Q{"#{get_checksum}"}
@@ -98,9 +98,9 @@ task :update_formula do
   update_formula(version)
   print "> Updated formula to version: #{version}"
   `rm xctools.tar.gz`
-  `git add Formula/xcode.rb`
+  `git add Formula/xctools.rb`
   `git commit -m "Update Formula to #{version}" release`
-  `git push origin`
+  `git push origin release/#{version}`
   print "> Commit created and pushed to repository"
 end
 
