@@ -11,7 +11,7 @@ Group {
         let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
                                    Option("configs", "", flag: "c", description: "Comma separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (buildAllConfigs: Bool, configs: String) in
                                     guard let environment = XcodeEnvironment() else {
-                                        return print("This command can only be executed from a build phase")
+                                        throw "This command can only be executed from a build phase"
                                     }
                                     try EmbedCommand(buildAllConfigs: buildAllConfigs,
                                                      configsToBuild: configs.components(separatedBy: ","),
@@ -36,31 +36,21 @@ Group {
                                     Option("output", "", flag: "o", description: "Output path (e.g. /path/output.xcconfig)"),
                                     Flag("merge", flag: "m", description: "Merge the target settings with the project ones", default: false)) { (project: String, target: String, output: String, merge: Bool) in
                                         if project.isEmpty {
-                                            let error = "Project argument is required (e.g. -p MyProject.xcodeproj)"
-                                            print(error)
-                                            throw error
+                                            throw "Project argument is required (e.g. -p MyProject.xcodeproj)"
                                         }
                                         if output.isEmpty {
-                                            let error = "Output argument is required (e.g. -o /path/output.xcconfig)"
-                                            print(error)
-                                            throw error
+                                            throw "Output argument is required (e.g. -o /path/output.xcconfig)"
                                         }
-                                        do {
-                                            try BuildSettingsExportCommand(projectPath: Path(project),
-                                                                           target: target.isEmpty ? nil: target,
-                                                                           output: Path(output),
-                                                                           mergeSettings: merge).execute()
-                                        } catch {
-                                            return print(error)
-                                        }
+                                        try BuildSettingsExportCommand(projectPath: Path(project),
+                                                                       target: target.isEmpty ? nil: target,
+                                                                       output: Path(output),
+                                                                       mergeSettings: merge).execute()
         }
         buildSettings.addCommand("export", "export your build settings into an .xcconfig file", exportCommand)
         let cleanCommand = command(Option("project", "", flag: "p", description: "Xcode project"),
                                    Option("target", "", flag: "t", description: "Target whose build settings will be cleaned")) { (project: String, target: String) in
                                     if project.isEmpty {
-                                        let error = "Project argument is required (e.g. -p MyProject.xcodeproj)"
-                                        print(error)
-                                        throw error
+                                        throw "Project argument is required (e.g. -p MyProject.xcodeproj)"
                                     }
                                     try BuildSettingsCleanCommand(projectPath: Path(project), target: target).execute()
         }
