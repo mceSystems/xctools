@@ -8,7 +8,7 @@ let package = Package(
       .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.6.0")),
       .package(url: "https://github.com/kareman/SwiftShell.git", .upToNextMinor(from: "3.0.1")),
       .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.8.0")),
-      .package(url: "https://github.com/carambalabs/xcodeproj.git", .upToNextMinor(from: "0.1.2"))
+      .package(url: "https://github.com/xcodeswift/xcproj.git", .upToNextMinor(from: "1.3.0"))
     ],
     targets: [
       .target(
@@ -22,7 +22,7 @@ let package = Package(
       .target(
         name: "Version",
         dependencies: [
-          "xcodeproj",
+          "xcproj",
           "PathKit",
           .target(name: "Core"),
         ]
@@ -38,7 +38,7 @@ let package = Package(
       .target(
         name: "BuildSettings",
         dependencies: [
-          "xcodeproj",
+          "xcproj",
           .target(name: "Core"),
         ]
       ),
