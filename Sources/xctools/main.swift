@@ -36,10 +36,14 @@ Group {
                                     Option("output", "", flag: "o", description: "Output path (e.g. /path/output.xcconfig)"),
                                     Flag("merge", flag: "m", description: "Merge the target settings with the project ones", default: false)) { (project: String, target: String, output: String, merge: Bool) in
                                         if project.isEmpty {
-                                            return print("Project argument is required (e.g. -p MyProject.xcodeproj)")
+                                            let error = "Project argument is required (e.g. -p MyProject.xcodeproj)"
+                                            print(error)
+                                            throw error
                                         }
                                         if output.isEmpty {
-                                            return print("Output argument is required (e.g. -o /path/output.xcconfig)")
+                                            let error = "Output argument is required (e.g. -o /path/output.xcconfig)"
+                                            print(error)
+                                            throw error
                                         }
                                         do {
                                             try BuildSettingsExportCommand(projectPath: Path(project),
@@ -51,6 +55,16 @@ Group {
                                         }
         }
         buildSettings.addCommand("export", "export your build settings into an .xcconfig file", exportCommand)
+        let cleanCommand = command(Option("project", "", flag: "p", description: "Xcode project"),
+                                   Option("target", "", flag: "t", description: "Target whose build settings will be cleaned")) { (project: String, target: String) in
+                                    if project.isEmpty {
+                                        let error = "Project argument is required (e.g. -p MyProject.xcodeproj)"
+                                        print(error)
+                                        throw error
+                                    }
+                                    try BuildSettingsCleanCommand(projectPath: Path(project), target: target).execute()
+        }
+        buildSettings.addCommand("clean", "cleans the project/target build settings", cleanCommand)
     }
     }.run()
 // swiftlint:enable line_length
