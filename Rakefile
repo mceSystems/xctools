@@ -99,7 +99,8 @@ task :update_formula do
   print "> Updated formula to version: #{version}"
   `rm xctools.tar.gz`
   `git add Formula/xctools.rb`
-  `git commit -m "Update Formula to #{version}" release`
+  `git commit -m "[release/#{version}] Update Formula"`
+  print "> Pushing to release/#{version}"
   `git push origin release/#{version}`
   print "> Commit created and pushed to repository"
 end
