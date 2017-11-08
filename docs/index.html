@@ -33,27 +33,26 @@
         <section>
           <section class="section">
             
-            <p align="center">
-<a href="https://github.com/xcodeswift/xctools">
-<img src="Assets/Logo.png" alt="xctools" width="350" />
-</a>
-</p>
+            <p><img src="Assets/header.png" width="400"/><br/></p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/package%20managers-SwiftPM-yellow.svg"/>
-  <a href="https://github.com/xcodeswift/xctools/releases">
-    <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
-  </a>
-  <a href="https://travis-ci.org/xcodeswift/xctools">
-    <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
-  </a>
-  <a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
-  </a>
-  <a>
-    <a href="http://xcodeswift.herokuapp.com/"><img src="https://xcodeswift.herokuapp.com/badge.svg"></a>
-  </a>
-</p>
+<p><a href="https://github.com/xcodeswift/xctools/releases">
+  <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
+</a>
+<a href="https://travis-ci.org/xcodeswift/xctools">
+  <img src="https://img.shields.io/travis/xcodeswift/xctools/master.svg?style=flat"/>
+</a>
+<a href="https://github.com/xcodeswift/xctools/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/mashape/apistatus.svg"/>
+</a>
+<a href="http://xcodeswift.herokuapp.com/">
+  <img src="https://xcodeswift.herokuapp.com/badge.svg">
+</a>
+<a href="https://twitter.com/xcodedotswift">
+  <img src="https://img.shields.io/badge/contact-@xcodedotswift-blue.svg?style=flat" alt="Twitter: @xcodedotswift" />
+</a>
+<a href="https://swift.org/package-manager">
+  <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" alt="Swift Package Manager"/>
+</a></p>
 
 <p>A set of command line tools to interact with your Xcode projects.</p>
 <h2 id='install' class='heading'>Install</h2>
@@ -75,16 +74,32 @@ brew install xctools
 <h2 id='usage' class='heading'>Usage</h2>
 
 <p>You can check the available commands by just running <code>xctools</code> from the console.</p>
-<h4 id='frameworks' class='heading'>Frameworks</h4>
-<h5 id='embed' class='heading'>Embed</h5>
+<h3 id='frameworks' class='heading'>Frameworks</h3>
+<h4 id='embed' class='heading'>Embed</h4>
 
 <p>It embeds your frameworks, their symbols, and the bcsymbolmap files into your built product stripping all the unnecessary architectures. This command should be used from a Xcode build phase as shown in the screenshot below:</p>
 
 <p><img src="Assets/Frameworks-Embed.png" alt="Xcode build phase using the command to embed the frameworks"></p>
-<h5 id='strip' class='heading'>Strip</h5>
+<h4 id='strip' class='heading'>Strip</h4>
 
 <p>It strips architectures from your frameworks:</p>
 <pre class="highlight plaintext"><code>xctools frameworks strip MyFramework.framework --archs armv7
+</code></pre>
+<h3 id='build-settings' class='heading'>Build Settings</h3>
+<h4 id='clean' class='heading'>Clean</h4>
+
+<p>It cleans the build settings from a target or a project:</p>
+<pre class="highlight shell"><code>xctools build-settings clean --project MyProject.xcodeproj
+xctools build-settings clean --project MyProject.xcodeproj --target MyTarget
+</code></pre>
+<h4 id='export' class='heading'>Export</h4>
+
+<p>It exports the build settings into a <code>.xcconfig</code> file:</p>
+<pre class="highlight shell"><code>xctools build-settings <span class="nb">export</span> --project MyProject.xcodeproj --output MyProject.xcconfig
+xctools build-settings <span class="nb">export</span> --project MyProject.xcodeproj --target --output Target.xcconfig
+
+// It can merge the project and target settings into a single .xcconfig file
+xctools build-settings <span class="nb">export</span> --project MyProject.xcodeproj --target --output Target.xcconfig --merge
 </code></pre>
 <h2 id='references' class='heading'>References</h2>
 
