@@ -52,7 +52,7 @@ Group {
                                     if project.isEmpty {
                                         throw "Project argument is required (e.g. -p MyProject.xcodeproj)"
                                     }
-                                    try BuildSettingsCleanCommand(projectPath: Path(project), target: target).execute()
+                                    try BuildSettingsCleanCommand(projectPath: Path(project), target: target.isEmpty ? nil : target).execute()
         }
         buildSettings.addCommand("clean", "cleans the project/target build settings", cleanCommand)
     }
