@@ -45,18 +45,39 @@ mint run xcodeswift/xctools
 
 You can check the available commands by just running `xctools` from the console.
 
-#### Frameworks
+### Frameworks
 
-##### Embed
+#### Embed
 It embeds your frameworks, their symbols, and the bcsymbolmap files into your built product stripping all the unnecessary architectures. This command should be used from a Xcode build phase as shown in the screenshot below:
 
 ![Xcode build phase using the command to embed the frameworks](Assets/Frameworks-Embed.png)
 
-##### Strip
+#### Strip
 It strips architectures from your frameworks:
 
 ```
 xctools frameworks strip MyFramework.framework --archs armv7
+```
+
+### Build Settings
+
+#### Clean
+It cleans the build settings from a target or a project:
+
+```bash
+xctools build-settings clean --project MyProject.xcodeproj
+xctools build-settings clean --project MyProject.xcodeproj --target MyTarget
+```
+
+#### Export
+It exports the build settings into a `.xcconfig` file:
+
+```bash
+xctools build-settings export --project MyProject.xcodeproj --output MyProject.xcconfig
+xctools build-settings export --project MyProject.xcodeproj --target --output Target.xcconfig
+
+// It can merge the project and target settings into a single .xcconfig file
+xctools build-settings export --project MyProject.xcodeproj --target --output Target.xcconfig --merge
 ```
 
 ## References
