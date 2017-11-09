@@ -47,30 +47,30 @@ final class BuildSettingsExportCommandTests: XCTestCase {
     func test_execute_returnsTheCorrectContent_whenProjectSettings() {
         let subject = try? output(project: project())
         XCTAssertEqual(subject, """
-        A=[config=Debug] = AA_VALUE
-        A=[config=Release] = AA_VALUE
-        B=[config=Debug] = 33
-        B=[config=Release] = BB_VALUE\n
+        A[config=Debug] = AA_VALUE
+        A[config=Release] = AA_VALUE
+        B[config=Debug] = 33
+        B[config=Release] = BB_VALUE\n
         """)
     }
     
     func test_execute_returnsTheCorrectContent_whenTargetSettings() {
         let subject = try? output(project: project(), target: "target")
         XCTAssertEqual(subject, """
-        A=[config=Debug] = A_VALUE
-        A=[config=Release] = A_VALUE2
-        B=[config=Debug] = B_VALUE $(inherited)
-        B=[config=Release] = YES\n
+        A[config=Debug] = A_VALUE
+        A[config=Release] = A_VALUE2
+        B[config=Debug] = B_VALUE $(inherited)
+        B[config=Release] = YES\n
         """)
     }
     
     func test_execute_returnsTheCorrectContent_whenTargetSettingsMerging() {
         let subject = try? output(project: project(), target: "target", mergeSettings: true)
         XCTAssertEqual(subject, """
-        A=[config=Debug] = A_VALUE
-        A=[config=Release] = A_VALUE2
-        B=[config=Debug] = 33 B_VALUE
-        B=[config=Release] = YES\n
+        A[config=Debug] = A_VALUE
+        A[config=Release] = A_VALUE2
+        B[config=Debug] = 33 B_VALUE
+        B[config=Release] = YES\n
         """)
     }
     

@@ -126,7 +126,7 @@ public struct BuildSettingsExportCommand {
     
     fileprivate func buildSettings(from configuration: XCBuildConfiguration) -> [String: ConfigurationBuildSetting] {
         return configuration.buildSettings.reduce(into: [String: ConfigurationBuildSetting](), { (prev, next) in
-            prev["\(next.key)=[config=\(configuration.name)]"] = ConfigurationBuildSetting(value: next.value)
+            prev["\(next.key)[config=\(configuration.name)]"] = ConfigurationBuildSetting(value: next.value)
         })
     }
     
