@@ -1,7 +1,7 @@
 🚀 Check out the guidelines [here](https://github.com/xcodeswift/contributors/blob/master/CHANGELOG_GUIDELINES.md)
 
 ## 0.4.0 - (next version)
-- Add Danger by @pepibumur
+- Add Danger https://github.com/xcodeswift/xctools/pull/18 by @pepibumur
 
 ## 0.3.0
 
