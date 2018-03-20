@@ -1,5 +1,6 @@
 <img src="Assets/header.png" width="400"/><br/>
 
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
 <a href="https://github.com/xcodeswift/xctools/releases">
   <img src="https://img.shields.io/github/release/xcodeswift/xcode.svg"/>
 </a>
