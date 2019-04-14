@@ -5,10 +5,10 @@ import PackageDescription
 let package = Package(
     name: "xctools",
     dependencies: [
-      .package(url: "https://github.com/kylef/Commander.git", .upToNextMinor(from: "0.6.0")),
-      .package(url: "https://github.com/kareman/SwiftShell.git", .upToNextMinor(from: "3.0.1")),
-      .package(url: "https://github.com/kylef/PathKit.git", .upToNextMinor(from: "0.8.0")),
-      .package(url: "https://github.com/xcodeswift/xcproj.git", .upToNextMinor(from: "1.3.0"))
+      .package(url: "https://github.com/kylef/Commander.git", .exact("0.8.0")),
+      .package(url: "https://github.com/kareman/SwiftShell.git", .exact("4.1.2")),
+      .package(url: "https://github.com/kylef/PathKit.git", .exact("0.9.2")),
+      .package(url: "https://github.com/xcodeswift/xcproj.git", .exact("1.8.0"))
     ],
     targets: [
       .target(
@@ -56,5 +56,5 @@ let package = Package(
       ),
       .target(name: "TestsFoundation", dependencies: ["PathKit"] )
     ],
-    swiftLanguageVersions: [3]
+    swiftLanguageVersions: [4]
 )
