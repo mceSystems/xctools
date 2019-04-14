@@ -8,7 +8,7 @@ import Core
 
 Group {
     $0.group("frameworks", "set of tools to work with frameworks in your project") { (frameworks) in
-        let embedCommand = command(Flag("allconfigs", flag: "a", description: "Embed the frameworks for all the configurations", default: true),
+        let embedCommand = command(Flag("allconfigs", default: true, flag: "a", description: "Embed the frameworks for all the configurations"),
                                    Option("configs", "", flag: "c", description: "Comma separated list of configs that need the framework to be embed (e.g. Debug,Release)")) { (buildAllConfigs: Bool, configs: String) in
                                     guard let environment = XcodeEnvironment() else {
                                         throw "This command can only be executed from a build phase"
@@ -34,7 +34,7 @@ Group {
         let exportCommand = command(Option("project", "", flag: "p", description: "Xcode project"),
                                     Option("target", "", flag: "t", description: "Target whose build settings will be extracted"),
                                     Option("output", "", flag: "o", description: "Output path (e.g. /path/output.xcconfig)"),
-                                    Flag("merge", flag: "m", description: "Merge the target settings with the project ones", default: false)) { (project: String, target: String, output: String, merge: Bool) in
+                                    Flag("merge", default: false, flag: "m", description: "Merge the target settings with the project ones")) { (project: String, target: String, output: String, merge: Bool) in
                                         if project.isEmpty {
                                             throw "Project argument is required (e.g. -p MyProject.xcodeproj)"
                                         }
