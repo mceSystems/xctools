@@ -107,10 +107,12 @@ public class EmbedCommand {
         if action == .install {
             try Package(path: inputPath).bcSymbolMapsForFramework()
                 .forEach{ (bcInputPath) in
-                    let bcOputputPath = Path(builtProductsDir) + bcInputPath.lastComponent
-                    if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
-                    if bcOputputPath.exists { try bcOputputPath.delete() }
-                    try bcInputPath.copy(bcOputputPath)
+                    if bcInputPath.exists {
+                        let bcOputputPath = Path(builtProductsDir) + bcInputPath.lastComponent
+                        if !bcOputputPath.parent().exists { try bcOputputPath.parent().mkpath() }
+                        if bcOputputPath.exists { try bcOputputPath.delete() }
+                        try bcInputPath.copy(bcOputputPath)
+                    }
             }
         }
     }
