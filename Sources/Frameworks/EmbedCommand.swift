@@ -92,14 +92,16 @@ public class EmbedCommand {
         try Package(path: outputPath).strip(keepingArchitectures: validArchs)
         
         // Symbols
-        if !outputDsymPath.parent().exists {
-            try outputDsymPath.parent().mkpath()
+        if inputDsymPath.exists {
+            if !outputDsymPath.parent().exists {
+                try outputDsymPath.parent().mkpath()
+            }
+            if outputDsymPath.exists {
+                try outputDsymPath.delete()
+            }
+            try inputDsymPath.copy(outputDsymPath)
+            try Package(path: outputDsymPath).strip(keepingArchitectures: validArchs)
         }
-        if outputDsymPath.exists {
-            try outputDsymPath.delete()
-        }
-        try inputDsymPath.copy(outputDsymPath)
-        try Package(path: outputDsymPath).strip(keepingArchitectures: validArchs)
         
         // BCSymbolMap
         if action == .install {
