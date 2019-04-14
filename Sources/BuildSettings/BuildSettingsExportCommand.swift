@@ -155,7 +155,7 @@ public struct BuildSettingsExportCommand {
     
     fileprivate func write(settings: [String: ConfigurationBuildSetting]) throws {
         let content = settings
-            .sorted(by: { $0.0.key < $0.1.key})
+            .sorted(by: { $0.key < $1.key})
             .reduce(into: "", { (prev, value) in
             let setting = value.key
             let settingValue = value.value
