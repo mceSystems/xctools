@@ -68,9 +68,9 @@ public struct XcodeEnvironment {
         guard let codeSignRequired = environment["CODE_SIGNING_REQUIRED"] else { return nil }
         guard let codeSigningAllowed = environment["CODE_SIGNING_ALLOWED"] else { return nil }
         guard let expandedCodeSignIdentityName = environment["EXPANDED_CODE_SIGN_IDENTITY_NAME"] else { return nil }
-        guard let otherCodeSignFlags = environment["OTHER_CODE_SIGN_FLAGS"] else { return nil }
         guard let validArchs = environment["VALID_ARCHS"] else { return nil }
         guard let action = environment["ACTION"] else { return nil }
+        let otherCodeSignFlags = environment["OTHER_CODE_SIGN_FLAGS"] ?? "";
         self.configuration = configuration
         self.configurationBuildDir = configurationBuildDir
         self.frameworksFolderPath = frameworksFolderPath
